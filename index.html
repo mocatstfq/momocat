@@ -110,7 +110,7 @@
             display: grid;
             gap: clamp(20px, 3vw, 32px);
             margin: 0 auto;
-            grid-template-columns: repeat(4, 1fr);   /* 桌面显示4列，适应较多分类 */
+            grid-template-columns: repeat(4, 1fr);
             min-width: max-content;
         }
         .rubber-tablet .menu-grid {
@@ -192,7 +192,7 @@
             display: none;
         }
 
-        /* ===== 封面卡片（海报） ===== */
+        /* ===== 封面卡片（海报）· 清空内容但保留光影 ===== */
         .cover-card {
             width: 100%;
             background: linear-gradient(145deg, #0b0b0c 0%, #1a1a1e 40%, #2a2a30 100%);
@@ -210,6 +210,8 @@
                 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
                 0 0 20px rgba(160, 200, 255, 0.3),
                 0 0 40px rgba(200, 160, 255, 0.2);
+            /* 保留高度 */
+            min-height: clamp(180px, 30vw, 280px);
         }
 
         .cover-card::before {
@@ -245,53 +247,12 @@
             100% { left: -100%; opacity: 0; }
         }
 
-        .cover-subtitle {
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            opacity: 0.7;
-            margin-bottom: clamp(16px, 4vw, 24px);
-            font-weight: 400;
-            position: relative;
-            z-index: 2;
-        }
-
-        .cover-domain {
-            font-size: clamp(2.2rem, 10vw, 5.5rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff 0%, #e0c8ff 50%, #a0d0ff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: clamp(16px, 4vw, 24px);
-            word-break: break-word;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-            position: relative;
-            display: inline-block;
-            z-index: 2;
-        }
-
-        .cover-footer-text {
-            font-size: clamp(1rem, 3.5vw, 1.4rem);
-            opacity: 0.85;
-            font-weight: 300;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 2;
-        }
-
+        /* 清空文字内容，仅保留空壳供光影特效显示 */
+        .cover-subtitle,
+        .cover-domain,
+        .cover-footer-text,
         .cover-badge {
-            display: inline-block;
-            margin-top: clamp(20px, 4vw, 28px);
-            padding: 6px 16px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 40px;
-            font-size: clamp(0.8rem, 2.5vw, 1rem);
-            border: 0.5px solid rgba(255,255,255,0.15);
-            backdrop-filter: blur(4px);
-            position: relative;
-            z-index: 2;
+            display: none;
         }
 
         .content-inner {
@@ -304,7 +265,7 @@
             display: block;
         }
 
-        /* ===== 宽卡片 ===== */
+        /* ===== 宽卡片（维护提示） ===== */
         .wide-card {
             background: white;
             border-radius: clamp(20px, 3vw, 28px);
@@ -347,26 +308,6 @@
             font-size: clamp(1rem, 3vw, 1.2rem);
             margin-bottom: 24px;
         }
-        .underline-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #0071e3;
-            font-weight: 500;
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            text-decoration: none;
-            border-bottom: 1.5px solid transparent;
-            transition: border-color 0.2s, color 0.2s;
-            padding-bottom: 2px;
-        }
-        .underline-btn:hover {
-            border-bottom-color: #0071e3;
-        }
-        .underline-btn::after {
-            content: "→";
-            font-size: 1.2em;
-            line-height: 1;
-        }
 
         .card-btn {
             background: transparent;
@@ -399,7 +340,7 @@
         <div class="header-title" id="mocTitle" role="button" aria-label="菜单">Moc</div>
     </header>
 
-    <!-- 下拉菜单（新结构） -->
+    <!-- 下拉菜单（程序链接已清除） -->
     <div class="dropdown-menu" id="dropdownMenu" role="navigation">
         <div class="menu-scroll" id="menuScroll">
             <div class="menu-grid" id="menuGrid">
@@ -408,8 +349,6 @@
                     <h3>主页</h3>
                     <ul>
                         <li><a href="#">新闻室</a></li>
-                        <li><a href="#">合作机会</a></li>
-                        <li><a href="#">联系我们</a></li>
                     </ul>
                 </div>
                 <!-- 商店 -->
@@ -424,38 +363,23 @@
                 <div class="menu-section">
                     <h3>文学</h3>
                     <ul>
-                        <li><a href="mocnovels.html">莫川读书会</a></li>
-                        <li><a href="novel1_2.html">新小说</a></li>
                         <li><a href="#">Momoread</a></li>
                         <li><a href="#">全部小说</a></li>
-                    </ul>
-                </div>
-                <!-- 音乐 -->
-                <div class="menu-section">
-                    <h3>音乐</h3>
-                    <ul>
-                        <li><a href="playmusic.html">Sumer Partie</a></li>
-                        <li><a href="#">Beakoncord</a></li>
-                        <li><a href="#">Tupa the EP</a></li>
-                        <li><a href="#">retrecissement</a></li>
                     </ul>
                 </div>
                 <!-- 程序 -->
                 <div class="menu-section">
                     <h3>程序</h3>
                     <ul>
-                        <li><a href="#">Dancy26</a></li>
-                        <li><a href="tyubox.html">Tyubox待办盒子</a></li>
-                        <li><a href="nofeed.html">Nofeed简索</a></li>
+                        <li><a href="#">Tyubox待办盒子</a></li>
+                        <li><a href="#">Nofeed简索</a></li>
                     </ul>
                 </div>
                 <!-- 活动 -->
                 <div class="menu-section">
                     <h3>活动</h3>
                     <ul>
-                        <li><a href="#">unboxing26</a></li>
                         <li><a href="#">MOConference27</a></li>
-                        <li><a href="#">Conse2023</a></li>
                     </ul>
                 </div>
                 <!-- 教育 -->
@@ -464,33 +388,26 @@
                     <ul>
                         <li><a href="#">VisionX</a></li>
                         <li><a href="#">在线教育社区</a></li>
-                        <li><a href="#">资源下载</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 主内容区域（临时活动版） -->
+    <!-- 主内容区域 -->
     <div class="main-content" id="mainContent">
-        <div class="cover-card">
-            <div class="cover-subtitle">全新单曲</div>
-            <div class="cover-domain">Sumer Partie</div>
-            <div class="cover-footer-text">4.24 全球发布</div>
-            <div class="cover-badge">🎵 夏日氛围电子乐 🎵</div>
-        </div>
+        <!-- 清空后的纯光影海报 -->
+        <div class="cover-card"></div>
 
         <div class="content-inner">
-            <a href="playmusic.html" class="card-link-wrapper">
-                <div class="wide-card">
-                    <div class="wide-card-image img-dark">🎵</div>
-                    <div class="wide-card-content">
-                        <h2 class="wide-card-title">Sumer Partie</h2>
-                        <p class="wide-card-desc">全新单曲 · 夏日氛围电子乐</p>
-                        <span class="card-btn">试听</span>
-                    </div>
+            <!-- 维护提示卡片 -->
+            <div class="wide-card">
+                <div class="wide-card-image img-dark">🔧</div>
+                <div class="wide-card-content">
+                    <h2 class="wide-card-title">正在维护中</h2>
+                    <p class="wide-card-desc">该页面暂时不可用，请稍后再来。</p>
                 </div>
-            </a>
+            </div>
 
             <div class="hidden-cards"></div>
         </div>
