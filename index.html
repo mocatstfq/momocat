@@ -61,7 +61,7 @@
         }
         .main-content::-webkit-scrollbar { display: none; }
 
-        /* 海报：无图片背景，无模糊条 */
+        /* 海报 */
         .cover-card {
             width: 100%;
             background-color: #e0e0e5;
@@ -120,7 +120,6 @@
             margin-bottom: clamp(24px, 4vw, 36px);
             line-height: 1.1;
         }
-        /* 海报按钮：蓝色填充 */
         .card-btn {
             background: #0071e3;
             border: 1.5px solid #0071e3;
@@ -219,7 +218,7 @@
             display: inline;
         }
 
-        /* 弹窗与下载样式 */
+        /* 兑换下载弹窗 */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.35); backdrop-filter: blur(8px);
@@ -266,6 +265,36 @@
         .download-btn:hover { background: #0071e3; color: white; border-color: #0071e3; }
         .download-btn small { display: block; font-weight: 400; font-size: 0.8rem; color: #6e6e73; }
         .download-btn:hover small { color: rgba(255,255,255,0.8); }
+
+        /* 预告弹窗专用样式 */
+        .trailer-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.35); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); z-index: 52; display: flex;
+            align-items: center; justify-content: center; visibility: hidden; opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+        .trailer-modal-overlay.show { visibility: visible; opacity: 1; }
+        .trailer-modal-dialog {
+            background: white; border-radius: 28px; max-width: 800px; width: 90%; max-height: 85vh;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.12); position: relative; z-index: 53;
+            display: flex; flex-direction: column; overflow: hidden; padding: 0;
+        }
+        .trailer-video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+        }
+        .trailer-video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+        /* 移除挡板层，不再需要 */
+        .video-block-layer {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -274,7 +303,6 @@
     </header>
 
     <div class="main-content" id="mainContent">
-        <!-- 海报：已移除图片背景和模糊条，使用纯浅灰背景，标题与按钮居中 -->
         <div class="cover-card" id="coverCard">
             <div class="cover-top-left">新Headline</div>
             <div class="cover-center">
@@ -283,7 +311,6 @@
             </div>
         </div>
 
-        <!-- 卡片 -->
         <div class="content-inner">
             <div class="poster-card" id="posterCard">
                 <div class="poster-center">
@@ -298,13 +325,31 @@
         </div>
     </div>
 
-    <!-- 弹窗 -->
+    <!-- 下载弹窗 -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-dialog" id="modalDialog">
             <button class="modal-close-btn" id="modalCloseBtn">
                 <svg viewBox="0 0 14 14" fill="none"><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </button>
             <div class="modal-content-area" id="modalContentArea"></div>
+        </div>
+    </div>
+
+    <!-- 预告弹窗 -->
+    <div class="trailer-modal-overlay" id="trailerModalOverlay">
+        <div class="trailer-modal-dialog" id="trailerModalDialog">
+            <button class="modal-close-btn" id="trailerCloseBtn">
+                <svg viewBox="0 0 14 14" fill="none"><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+            <div class="modal-content-area" id="trailerContentArea">
+                <div style="padding: 40px 32px 32px; position: relative;">
+                    <div class="modal-title-text" style="margin: 0 0 8px 0; padding: 0; font-weight:700; color:#1d1d1f; font-size:1.8rem;">线上活动</div>
+                    <div style="color: #86868b; font-size:0.9rem; margin-bottom: 24px;">2026.5.30</div>
+                    <div id="trailerVideoContainer">
+                        <!-- 动态填充 -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -337,6 +382,7 @@
                 SmoothScrollEngine.init();
                 RubberEngine.init();
 
+                // 下载弹窗
                 const trialReadBtn = document.getElementById('trialReadBtn');
                 const modalOverlay = document.getElementById('modalOverlay');
                 const modalCloseBtn = document.getElementById('modalCloseBtn');
@@ -398,14 +444,82 @@
                     renderRedeemView();
                     modalOverlay.classList.add('show');
                 }
-                function closeModal() {
-                    modalOverlay.classList.remove('show');
-                }
+                function closeModal() { modalOverlay.classList.remove('show'); }
 
                 trialReadBtn.addEventListener('click', openModal);
                 modalCloseBtn.addEventListener('click', closeModal);
                 modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
                 document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modalOverlay.classList.contains('show')) closeModal(); });
+
+                // 预告弹窗（有声音）
+                const trailerBtn = document.getElementById('trailerBtn');
+                const trailerOverlay = document.getElementById('trailerModalOverlay');
+                const trailerCloseBtn = document.getElementById('trailerCloseBtn');
+                const trailerVideoContainer = document.getElementById('trailerVideoContainer');
+                const targetDate = new Date('2026-05-30T00:00:00');
+                let currentVideo = null;
+
+                function getVideoInfo() {
+                    const now = new Date();
+                    if (now < targetDate) {
+                        return { file: 'pre.mp4', label: '活动预热中' };
+                    } else if (now.toDateString() === targetDate.toDateString()) {
+                        return { file: 'event.mp4', label: '活动进行中' };
+                    } else {
+                        return { file: 're.mp4', label: '活动回顾' };
+                    }
+                }
+
+                function updateTrailerVideo() {
+                    if (currentVideo) {
+                        currentVideo.pause();
+                        currentVideo.remove();
+                        currentVideo = null;
+                    }
+
+                    const { file, label } = getVideoInfo();
+                    trailerVideoContainer.innerHTML = `
+                        <div class="trailer-video-wrapper">
+                            <video src="${file}" autoplay playsinline loop style="width:100%; display:block; border-radius:16px;"></video>
+                        </div>
+                        <p style="text-align:center; margin-top:12px; color:#6e6e73; font-size:0.85rem;">${label} · ${file}</p>
+                    `;
+
+                    const video = trailerVideoContainer.querySelector('video');
+                    if (video) {
+                        currentVideo = video;
+                        // 移除静音，允许声音
+                        video.muted = false;
+                        // 尝试播放
+                        video.play().then(() => {
+                            console.log('视频有声播放成功');
+                        }).catch(err => {
+                            console.warn('自动播放被浏览器拦截，可能需要用户点击。请检查音频策略。');
+                        });
+                        // 禁止键盘快进
+                        video.addEventListener('keydown', e => e.preventDefault());
+                    }
+                }
+
+                function openTrailer(e) {
+                    e.preventDefault();
+                    updateTrailerVideo();
+                    trailerOverlay.classList.add('show');
+                }
+
+                function closeTrailer() {
+                    if (currentVideo) {
+                        currentVideo.pause();
+                        currentVideo.remove();
+                        currentVideo = null;
+                    }
+                    trailerOverlay.classList.remove('show');
+                }
+
+                trailerBtn.addEventListener('click', openTrailer);
+                trailerCloseBtn.addEventListener('click', closeTrailer);
+                trailerOverlay.addEventListener('click', function(e) { if (e.target === trailerOverlay) closeTrailer(); });
+                document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && trailerOverlay.classList.contains('show')) closeTrailer(); });
             }
 
             window.addEventListener('load', init);
