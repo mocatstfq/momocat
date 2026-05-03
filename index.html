@@ -19,36 +19,99 @@
             --rubber-card-gap: clamp(16px, 2vw, 24px);
             --rubber-section-padding: clamp(16px, 3vw, 32px);
         }
-        /* 强制全局 Inter 字体，覆盖所有元素 */
         body, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea {
             font-family: 'Inter', sans-serif !important;
         }
 
         .site-header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: clamp(10px, 2vw, 12px) clamp(16px, 3vw, 24px);
-            background-color: rgba(251, 251, 253, 0.65);
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border-bottom: 0.8px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02); z-index: 30;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            padding: clamp(6px, 1.5vw, 10px) clamp(22px, 4vw, 30px);
+            background-color: rgba(251, 251, 253, 0.55);
+            backdrop-filter: blur(35px) saturate(200%);
+            -webkit-backdrop-filter: blur(35px) saturate(200%);
+            border-radius: 80px;
+            border: 0.8px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04), 0 8px 20px rgba(0,0,0,0.02);
+            z-index: 30;
             display: flex; align-items: center; justify-content: center;
+            gap: clamp(12px, 2.5vw, 24px);
+            flex-wrap: nowrap;
         }
         .header-title {
-            font-weight: 700; font-size: clamp(1.8rem, 5vw, 2.2rem);
-            letter-spacing: -0.02em; color: #1d1d1f;
-            padding: clamp(6px, 1.5vw, 8px) clamp(20px, 4vw, 28px);
-            border-radius: 40px; min-height: 44px; display: flex; align-items: center;
+            font-weight: 700;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            padding: clamp(3px, 0.8vw, 6px) 0;
             user-select: none;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
+        .mode-switcher {
+            display: flex; align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 60px;
+            padding: 3px;
+            border: 0.5px solid rgba(0, 0, 0, 0.06);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.02);
+            flex-shrink: 0; position: relative;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .mode-option {
+            position: relative;
+            display: flex; align-items: center;
+            gap: clamp(3px, 0.5vw, 6px);
+            padding: clamp(5px, 0.6vw, 8px) clamp(10px, 1.5vw, 18px);
+            border-radius: 40px;
+            font-size: clamp(0.7rem, 1vw, 0.9rem);
+            font-weight: 500;
+            color: #6e6e73;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.3, 1.2);
+            background: transparent; border: none; outline: none;
+            user-select: none; white-space: nowrap;
+            letter-spacing: 0.01em;
+            font-family: 'Inter', sans-serif !important;
+        }
+        .mode-option:hover { color: #1d1d1f; }
+        .mode-option.active {
+            background: #e6f0fa;
+            color: #0071e3;
+            font-weight: 600;
+            box-shadow: 0 1px 6px rgba(0, 113, 227, 0.08);
+        }
+        .mode-option svg {
+            width: clamp(12px, 1vw, 16px);
+            height: clamp(12px, 1vw, 16px);
+            flex-shrink: 0; display: block;
+            transition: stroke 0.2s, fill 0.2s;
+        }
+        .mode-option svg * {
+            stroke: #86868b; fill: none;
+            transition: stroke 0.2s, fill 0.2s;
+        }
+        .mode-option.active svg * { stroke: #0071e3; fill: #0071e3; }
+        .mode-option[data-mode="home"] svg * { fill: #86868b; stroke: none; }
+        .mode-option[data-mode="home"].active svg * { fill: #0071e3; stroke: none; }
+        .mode-option[data-mode="shop"] svg * { stroke: #86868b; fill: none; }
+        .mode-option[data-mode="shop"].active svg * { stroke: #0071e3; fill: none; }
+
         .main-content {
-            position: fixed; top: 72px; left: 0; width: 100%; height: calc(100vh - 72px);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             overflow-y: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; overscroll-behavior-y: contain;
+            scrollbar-width: thin; scrollbar-color: #c8c8ce transparent;
+            overscroll-behavior-y: contain;
             padding-bottom: calc(var(--rubber-section-padding) * 1.5);
         }
-        .main-content::-webkit-scrollbar { display: none; }
+        .main-content::-webkit-scrollbar { width: 6px; }
+        .main-content::-webkit-scrollbar-track { background: transparent; }
+        .main-content::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
 
         .cover-card {
             width: 100%; background-color: #e0e0e5;
@@ -89,8 +152,10 @@
             padding: clamp(8px, 1.5vw, 12px) clamp(20px, 3vw, 28px); border-radius: 40px;
             font-weight: 500; font-size: clamp(0.95rem, 2.5vw, 1.1rem); text-decoration: none;
             transition: all 0.2s ease; white-space: nowrap; display: inline-block; cursor: pointer;
+            min-height: 44px; display: inline-flex; align-items: center;
         }
         .card-btn:hover { background: #005bb5; border-color: #005bb5; }
+        .card-btn:active { transform: scale(0.97); }
 
         .content-inner {
             padding: var(--rubber-section-padding) var(--rubber-section-padding) 0;
@@ -109,11 +174,16 @@
             border: 0.5px solid rgba(0,0,0,0.04); cursor: pointer;
         }
         .poster-card { background: #0D5C3A; }
-        .poster-card:hover, .new-rule-card:hover, .store-card:hover, .redeem-card:hover, .novel-new-card:hover {
+        .poster-card:hover, .new-rule-card:hover, .store-card:hover, .novel-new-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 28px rgba(0,0,0,0.08);
         }
-        .redeem-card { background: #FFB7C5; }
+        .poster-card:active, .new-rule-card:active, .store-card:active, .novel-new-card:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .redeem-card { background: #2A1A1A; }
         .novel-new-card { background: linear-gradient(135deg, #FFA500, #FFD700); }
 
         .poster-center, .new-rule-center, .store-center, .redeem-center, .novel-center {
@@ -133,10 +203,10 @@
         }
         .redeem-center .new-rule-title {
             font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 90%;
-            color: #ffffff;
+            color: #FFB7C5;
         }
         .novel-center .new-rule-title {
-            color: #ffffff; font-size: clamp(2.5rem, 8vw, 3.5rem);
+            color: #ffffff; font-size: clamp(1.8rem, 5vw, 2.8rem); white-space: nowrap;
         }
 
         .train-track {
@@ -186,20 +256,33 @@
             position: absolute; top: 16px; left: 16px; width: 36px; height: 36px;
             border-radius: 50%; background-color: #e5e5ea; border: none; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            transition: background-color 0.2s; z-index: 6;
+            transition: background-color 0.2s, transform 0.1s; z-index: 6;
         }
         .modal-close-btn:hover { background-color: #d1d1d6; }
+        .modal-close-btn:active { transform: scale(0.9); }
         .modal-close-btn svg { width: 16px; height: 16px; stroke: #1d1d1f; stroke-width: 2; }
 
-        .modal-content-area { overflow-y: auto; padding: 0; scrollbar-width: thin; scrollbar-color: #c8c8ce transparent; z-index: 1; flex: 1; }
+        .modal-content-area {
+            overflow-y: auto; padding: 0; scrollbar-width: thin; scrollbar-color: #c8c8ce transparent; z-index: 1; flex: 1;
+        }
+        .modal-content-area::-webkit-scrollbar { width: 6px; }
+        .modal-content-area::-webkit-scrollbar-track { background: transparent; }
+        .modal-content-area::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
 
-        .redeem-input { width: 100%; padding: 12px 16px; border-radius: 40px; border: 1.2px solid rgba(0,0,0,0.15); font-size: 0.95rem; color: #1d1d1f; background: #fbfbfd; margin-top: 12px; outline: none; transition: border-color 0.2s; }
-        .redeem-input:focus { border-color: #FF8A9E; }
-        .redeem-btn-inner { display: inline-block; background: transparent; border: 1.5px solid #FF8A9E; color: #FF8A9E; padding: 10px 24px; border-radius: 40px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; margin-top: 16px; white-space: nowrap; }
+        .redeem-input { width: 100%; padding: 12px 16px; border-radius: 40px; border: 1.2px solid rgba(0,0,0,0.15); font-size: 0.95rem; color: #1d1d1f; background: #fbfbfd; margin-top: 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; }
+        .redeem-input:focus { border-color: #0D5C3A; box-shadow: 0 0 0 3px rgba(13,92,58,0.15); }
+
+        .novel-theme .redeem-btn-inner { border-color: #0D5C3A; color: #0D5C3A; }
+        .novel-theme .redeem-btn-inner:hover { background-color: #0D5C3A; color: white; }
+        .novel-theme .redeem-input:focus { border-color: #0D5C3A; box-shadow: 0 0 0 3px rgba(13,92,58,0.15); }
+        .novel-theme .download-btn:hover { background: #0D5C3A; border-color: #0D5C3A; }
+
+        .redeem-btn-inner { display: inline-block; background: transparent; border: 1.5px solid #FF8A9E; color: #FF8A9E; padding: 10px 24px; border-radius: 40px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; margin-top: 16px; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
         .redeem-btn-inner:hover { background-color: #FF8A9E; color: white; }
+        .redeem-btn-inner:active { transform: scale(0.97); }
         .redeem-feedback { text-align: center; margin-top: 12px; font-size: 0.9rem; min-height: 24px; }
 
-        .download-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 24px; margin-bottom: 12px; background: #f5f5f7; border: 1px solid rgba(0,0,0,0.08); border-radius: 20px; color: #1d1d1f; font-weight: 600; font-size: 1.15rem; text-decoration: none; transition: all 0.2s ease; }
+        .download-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 24px; margin-bottom: 12px; background: #f5f5f7; border: 1px solid rgba(0,0,0,0.08); border-radius: 20px; color: #1d1d1f; font-weight: 600; font-size: 1.15rem; text-decoration: none; transition: all 0.2s ease; min-height: 44px; }
         .download-btn:hover { background: #FF8A9E; border-color: #FF8A9E; color: white; }
         .download-btn small { display: block; font-weight: 400; font-size: 0.8rem; color: #6e6e73; }
         .download-btn:hover small { color: rgba(255,255,255,0.8); }
@@ -221,11 +304,24 @@
             overflow-y: auto; flex: 1; padding: 0; scrollbar-width: thin; scrollbar-color: #c8c8ce transparent;
         }
         .rules-content::-webkit-scrollbar { width: 6px; }
+        .rules-content::-webkit-scrollbar-track { background: transparent; }
         .rules-content::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
     </style>
 </head>
 <body>
-    <header class="site-header"><div class="header-title">Moc</div></header>
+    <header class="site-header">
+        <div class="header-title">Momocat</div>
+        <div class="mode-switcher" id="modeSwitcher">
+            <button class="mode-option active" data-mode="home" aria-label="主页">
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3L2 12H5V21H10V15H14V21H19V12H22L12 3Z"/></svg>
+                <span>主页</span>
+            </button>
+            <button class="mode-option" data-mode="shop" aria-label="商店">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6V21H21V6L18 2H6Z"/><path d="M3 6H21"/><path d="M16 10C16 12.5 14 14 12 14C10 14 8 12.5 8 10"/></svg>
+                <span>商店</span>
+            </button>
+        </div>
+    </header>
 
     <div class="main-content" id="mainContent">
         <div class="cover-card" id="coverCard">
@@ -237,14 +333,6 @@
         </div>
 
         <div class="content-inner">
-            <div class="poster-card" id="posterCard">
-                <div class="poster-center">
-                    <div class="poster-novel-title">三号线</div>
-                    <div class="poster-subtitle">2016-2026</div>
-                </div>
-                <div class="train-track"><div class="train"><span class="train-window"></span><span class="train-window"></span><span class="train-window"></span><span class="train-window"></span><span class="train-window"></span></div></div>
-            </div>
-
             <div class="new-rule-card" id="newRuleCard">
                 <div class="new-rule-center"><div class="new-rule-title">2026 MOMOREAD<br>新制度</div></div>
             </div>
@@ -254,15 +342,23 @@
                 <div class="store-center"><div class="store-title" style="text-shadow: 0 2px 10px rgba(255,255,255,0.8);">在线商店</div></div>
             </div>
 
-            <div class="redeem-card" id="redeemCard">
-                <div class="redeem-center">
-                    <div class="new-rule-title">兑换在 Moc Store 购买的电子作品 - Beta</div>
+            <div class="poster-card" id="posterCard">
+                <div class="poster-center">
+                    <div class="poster-novel-title">三号线</div>
+                    <div class="poster-subtitle">2016-2026</div>
                 </div>
+                <div class="train-track"><div class="train"><span class="train-window"></span><span class="train-window"></span><span class="train-window"></span><span class="train-window"></span><span class="train-window"></span></div></div>
             </div>
 
             <div class="novel-new-card" id="novelNewCard">
                 <div class="novel-center">
-                    <div class="new-rule-title">新小说<br>寄往1999年的信</div>
+                    <div class="new-rule-title">新小说 寄往1999年的信</div>
+                </div>
+            </div>
+
+            <div class="redeem-card" id="redeemCard">
+                <div class="redeem-center">
+                    <div class="new-rule-title">兑换在 Moc Store 购买的电子作品 - Beta</div>
                 </div>
             </div>
         </div>
@@ -317,10 +413,36 @@
                 container.innerHTML = html;
             }
 
+            function initModeSwitcher() {
+                const options = document.querySelectorAll('.mode-option');
+                function setMode(mode) {
+                    options.forEach(btn => {
+                        const isActive = btn.dataset.mode === mode;
+                        btn.classList.toggle('active', isActive);
+                    });
+                    if (mode === 'home') {
+                        const mainContent = document.getElementById('mainContent');
+                        if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else if (mode === 'shop') {
+                        window.location.href = 'store';
+                    }
+                }
+                options.forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const mode = this.dataset.mode;
+                        if (this.classList.contains('active')) return;
+                        setMode(mode);
+                    });
+                });
+                setMode('home');
+            }
+
             function init() {
                 SmoothScrollEngine.init();
                 RubberEngine.init();
                 generateStoreBgText();
+                initModeSwitcher();
 
                 const validCodes = ['mcnstt039_d7', 'mcnstt039_e9', 'mcnstt039_q3', 'mcnstt039_a5'];
                 const modalOverlay = document.getElementById('modalOverlay');
@@ -372,10 +494,14 @@
 
                 function openTrialModal() {
                     modalDialog.style.maxWidth = '800px'; modalDialog.style.maxHeight = '85vh'; modalDialog.style.height = '';
+                    modalDialog.classList.add('novel-theme');
                     renderRedeemView('请输入兑换码', showDownloadView);
                     modalOverlay.classList.add('show');
                 }
-                function closeTrialModal() { modalOverlay.classList.remove('show'); }
+                function closeTrialModal() {
+                    modalOverlay.classList.remove('show');
+                    modalDialog.classList.remove('novel-theme');
+                }
                 modalCloseBtn.addEventListener('click', closeTrialModal);
                 modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeTrialModal(); });
                 document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modalOverlay.classList.contains('show')) closeTrialModal(); });
