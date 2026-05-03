@@ -163,10 +163,10 @@
         }
         @media (min-width: 1024px) {
             .content-inner { grid-template-columns: 1fr 1fr; max-width: 1400px; margin: 0 auto; }
-            .poster-card, .new-rule-card, .store-card, .redeem-card, .novel-new-card { max-width: 100%; width: 100%; }
+            .poster-card, .new-rule-card, .redeem-card, .novel-new-card { max-width: 100%; width: 100%; }
         }
 
-        .poster-card, .new-rule-card, .store-card, .redeem-card, .novel-new-card {
+        .poster-card, .new-rule-card, .redeem-card, .novel-new-card {
             width: 100%; max-width: 640px; margin: 0 auto; aspect-ratio: 16 / 9;
             border-radius: clamp(20px, 3vw, 28px);
             box-shadow: 0 2px 12px rgba(0,0,0,0.02), 0 8px 24px rgba(0,0,0,0.04);
@@ -174,11 +174,11 @@
             border: 0.5px solid rgba(0,0,0,0.04); cursor: pointer;
         }
         .poster-card { background: #0D5C3A; }
-        .poster-card:hover, .new-rule-card:hover, .store-card:hover, .novel-new-card:hover {
+        .poster-card:hover, .new-rule-card:hover, .novel-new-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 28px rgba(0,0,0,0.08);
         }
-        .poster-card:active, .new-rule-card:active, .store-card:active, .novel-new-card:active {
+        .poster-card:active, .new-rule-card:active, .novel-new-card:active {
             transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(0,0,0,0.06);
         }
@@ -186,7 +186,7 @@
         .redeem-card { background: #2A1A1A; }
         .novel-new-card { background: linear-gradient(135deg, #FFA500, #FFD700); }
 
-        .poster-center, .new-rule-center, .store-center, .redeem-center, .novel-center {
+        .poster-center, .new-rule-center, .redeem-center, .novel-center {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             text-align: center; z-index: 2; pointer-events: none;
         }
@@ -197,7 +197,7 @@
         }
         @keyframes blink { 0%, 100% { color: #ffffff; } 50% { color: #0D5C3A; } }
         .poster-subtitle { font-size: 1.2rem; font-weight: 500; color: rgba(255,255,255,0.8); letter-spacing: 1px; }
-        .new-rule-title, .store-title {
+        .new-rule-title {
             font-size: clamp(2.5rem, 8vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em;
             color: #1d1d1f; line-height: 1.2; margin-bottom: 8px;
         }
@@ -234,10 +234,6 @@
             letter-spacing: 2px; line-height: 1.8;
         }
         .store-bg-text span { display: inline-block; transition: all 0.25s cubic-bezier(0.2, 0.8, 0.3, 1.2); }
-        .store-card:hover .store-bg-text span:hover {
-            transform: scale(2.5); color: #C4A882; font-weight: 800; z-index: 2;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
 
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -269,21 +265,27 @@
         .modal-content-area::-webkit-scrollbar-track { background: transparent; }
         .modal-content-area::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
 
+        /* 统一的粉色主题变量 */
+        :root {
+            --pink-theme: #FF8A9E;
+            --pink-hover: #FF7088;
+        }
+
         .redeem-input { width: 100%; padding: 12px 16px; border-radius: 40px; border: 1.2px solid rgba(0,0,0,0.15); font-size: 0.95rem; color: #1d1d1f; background: #fbfbfd; margin-top: 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; }
-        .redeem-input:focus { border-color: #0D5C3A; box-shadow: 0 0 0 3px rgba(13,92,58,0.15); }
+        .redeem-input:focus { border-color: var(--pink-theme); box-shadow: 0 0 0 3px rgba(255,138,158,0.15); }
 
         .novel-theme .redeem-btn-inner { border-color: #0D5C3A; color: #0D5C3A; }
         .novel-theme .redeem-btn-inner:hover { background-color: #0D5C3A; color: white; }
         .novel-theme .redeem-input:focus { border-color: #0D5C3A; box-shadow: 0 0 0 3px rgba(13,92,58,0.15); }
         .novel-theme .download-btn:hover { background: #0D5C3A; border-color: #0D5C3A; }
 
-        .redeem-btn-inner { display: inline-block; background: transparent; border: 1.5px solid #FF8A9E; color: #FF8A9E; padding: 10px 24px; border-radius: 40px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; margin-top: 16px; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
-        .redeem-btn-inner:hover { background-color: #FF8A9E; color: white; }
+        .redeem-btn-inner { display: inline-block; background: transparent; border: 1.5px solid var(--pink-theme); color: var(--pink-theme); padding: 10px 24px; border-radius: 40px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; margin-top: 16px; white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
+        .redeem-btn-inner:hover { background-color: var(--pink-theme); color: white; }
         .redeem-btn-inner:active { transform: scale(0.97); }
         .redeem-feedback { text-align: center; margin-top: 12px; font-size: 0.9rem; min-height: 24px; }
 
         .download-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 24px; margin-bottom: 12px; background: #f5f5f7; border: 1px solid rgba(0,0,0,0.08); border-radius: 20px; color: #1d1d1f; font-weight: 600; font-size: 1.15rem; text-decoration: none; transition: all 0.2s ease; min-height: 44px; }
-        .download-btn:hover { background: #FF8A9E; border-color: #FF8A9E; color: white; }
+        .download-btn:hover { background: var(--pink-theme); border-color: var(--pink-theme); color: white; }
         .download-btn small { display: block; font-weight: 400; font-size: 0.8rem; color: #6e6e73; }
         .download-btn:hover small { color: rgba(255,255,255,0.8); }
 
@@ -335,11 +337,6 @@
         <div class="content-inner">
             <div class="new-rule-card" id="newRuleCard">
                 <div class="new-rule-center"><div class="new-rule-title">2026 MOMOREAD<br>新制度</div></div>
-            </div>
-
-            <div class="store-card" id="storeCard">
-                <div class="store-bg-text" id="storeBgText"></div>
-                <div class="store-center"><div class="store-title" style="text-shadow: 0 2px 10px rgba(255,255,255,0.8);">在线商店</div></div>
             </div>
 
             <div class="poster-card" id="posterCard">
@@ -403,16 +400,6 @@
                 }
             };
 
-            function generateStoreBgText() {
-                const container = document.getElementById('storeBgText');
-                if (!container) return;
-                const text = "MOMOREAD上新";
-                const chars = text.split('');
-                let html = '';
-                for (let i = 0; i < 350; i++) { html += `<span>${chars[i % chars.length]}</span>`; }
-                container.innerHTML = html;
-            }
-
             function initModeSwitcher() {
                 const options = document.querySelectorAll('.mode-option');
                 function setMode(mode) {
@@ -441,7 +428,6 @@
             function init() {
                 SmoothScrollEngine.init();
                 RubberEngine.init();
-                generateStoreBgText();
                 initModeSwitcher();
 
                 const validCodes = ['mcnstt039_d7', 'mcnstt039_e9', 'mcnstt039_q3', 'mcnstt039_a5'];
@@ -645,7 +631,6 @@
                 });
 
                 document.getElementById('newRuleCard').addEventListener('click', openRulesModal);
-                document.getElementById('storeCard').addEventListener('click', () => { window.location.href = 'store'; });
                 document.getElementById('redeemCard').addEventListener('click', () => {
                     modalDialog.style.maxWidth = '800px'; modalDialog.style.maxHeight = '85vh'; modalDialog.style.height = '';
                     renderRedeemView('兑换在 Moc Store 购买的电子作品 - Beta', showDownloadView);
