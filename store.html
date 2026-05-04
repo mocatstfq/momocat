@@ -28,7 +28,7 @@
             font-family: 'Inter', sans-serif !important;
         }
 
-        /* ========== 胶囊导航栏（完全照抄首页） ========== */
+        /* ========== 胶囊导航栏（移除拉伸和折射光效果） ========== */
         .site-header {
             position: fixed;
             top: 10px; left: 50%; transform: translateX(-50%);
@@ -40,11 +40,11 @@
             border-radius: 80px;
             border: 0.8px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 2px 10px rgba(0,0,0,0.04), 0 8px 20px rgba(0,0,0,0.02);
-            z-index: 30;
+            z-index: 1000;   /* 始终在最上层 */
             display: flex; align-items: center; justify-content: center;
             gap: 0;
             flex-wrap: nowrap;
-            overflow: hidden;
+            overflow: visible;  /* 确保子元素不被裁剪 */
         }
         .header-title {
             font-weight: 700; font-size: clamp(1.4rem, 3.5vw, 2rem);
@@ -60,26 +60,26 @@
             background-color: rgba(0, 0, 0, 0.03);
         }
 
+        /* 移除拉伸效果，仅保留宽度 + 透明度过渡 */
         .mode-switcher {
             display: flex; align-items: center;
             background: rgba(255, 255, 255, 0.6); border-radius: 60px;
-            padding: 3px; border: 0.5px solid rgba(0, 0, 0, 0.06);
+            padding: 3px;
+            border: 0.5px solid rgba(0, 0, 0, 0.06);
             box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.02);
             flex-shrink: 0; position: relative;
-            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             opacity: 0;
             max-width: 0;
-            transform: scaleX(0.2);
-            transform-origin: left center;
-            transition: all 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: none;
             overflow: hidden;
             white-space: nowrap;
+            transition: max-width 0.45s cubic-bezier(0.2, 0.9, 0.4, 1), opacity 0.35s ease;
+            pointer-events: none;
         }
         .mode-switcher.expanded {
             opacity: 1;
             max-width: 300px;
-            transform: scaleX(1);
             pointer-events: auto;
             margin-left: clamp(8px, 1.5vw, 14px);
         }
@@ -108,7 +108,7 @@
         .mode-option[data-mode="home"] svg * { fill: #86868b; stroke: none; }
         .mode-option[data-mode="home"].active svg * { fill: #0071e3; stroke: none; }
 
-        /* ========== 商店原有内容样式（保留原有交互，仅微调布局） ========== */
+        /* ========== 商店原有内容样式（保留原有交互） ========== */
         .main-content {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             overflow-y: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
@@ -247,7 +247,7 @@
         }
         .btn-large.beta-btn:hover { background: rgba(160, 160, 165, 0.3); transform: none; }
 
-        /* 弹窗毛玻璃 - 沿用原有样式 */
+        /* 弹窗毛玻璃 */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -299,7 +299,7 @@
             padding-right: 32px;
         }
 
-        /* 作品卡片等交互组件（保持原有功能） */
+        /* 作品卡片等交互组件 */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -513,7 +513,7 @@
     </style>
 </head>
 <body>
-    <!-- 胶囊导航栏（完全复刻自 index.html） -->
+    <!-- 胶囊导航栏 -->
     <header class="site-header">
         <div class="header-title" id="headerTitle">Momocat</div>
         <div class="mode-switcher expanded" id="modeSwitcher">
@@ -560,12 +560,12 @@
         </div>
     </div>
 
-    <!-- 订阅弹窗（原有完整功能） -->
+    <!-- 订阅弹窗 -->
     <div id="subscribeModal" class="modal-overlay"><div class="modal-dialog" id="modalDialog"><button class="modal-close" id="modalCloseBtn">✕</button><div id="modalContent"></div></div></div>
 
     <script>
 (function(){
-    // ========== 胶囊自动收起逻辑（完全照抄首页） ==========
+    // ========== 胶囊自动收起逻辑（移除拉伸效果，仅保留宽度/透明度过渡） ==========
     function initCapsuleAutoCollapse() {
         const switcher = document.getElementById('modeSwitcher');
         const title = document.getElementById('headerTitle');
@@ -628,11 +628,8 @@
                 btn.classList.toggle('active', isActive);
             });
             if (mode === 'home') {
-                // 主页跳转到 momocat.online
                 window.location.href = 'https://momocat.online';
             } else if (mode === 'shop') {
-                // 商店保持当前页面（不做任何跳转）
-                // 确保滚动到顶部
                 const mainContent = document.getElementById('mainContent');
                 if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -645,7 +642,7 @@
                 setMode(mode);
             });
         });
-        // 确保商店按钮高亮（默认选中商店）
+        // 确保商店按钮高亮
         setMode('shop');
     }
 
@@ -1090,7 +1087,7 @@
     modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('show')) closeModal(); });
 
-    // ========== 启动胶囊动画和模式切换 ==========
+    // 启动胶囊动画和模式切换
     initCapsuleAutoCollapse();
     initModeSwitcher();
 })();
