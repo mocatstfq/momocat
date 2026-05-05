@@ -459,7 +459,7 @@
     <header class="site-header">
         <div class="header-title" id="headerTitle">Momocat</div>
         <div class="mode-switcher" id="modeSwitcher">
-            <button class="mode-option active" data-mode="home" aria-label="Ztidsz Peij">
+            <button class="mode-option" data-mode="home" aria-label="Ztidsz Peij">
                 <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 3L2 12H5V21H10V15H14V21H19V12H22L12 3Z"/></svg>
                 <span>Ztidsz Peij</span>
             </button>
@@ -571,6 +571,7 @@
                 });
             }
 
+            // ===== 修复后的模式切换 =====
             function initModeSwitcher() {
                 const options = document.querySelectorAll('.mode-option');
                 function setMode(mode) {
@@ -579,10 +580,11 @@
                         btn.classList.toggle('active', isActive);
                     });
                     if (mode === 'home') {
-                        // 在莫语主页，点击主页按钮回到莫语首页（/mo）
-                        window.location.href = 'https://momocat.online/mo';
+                        // 已在莫语主页，仅滚动到顶部
+                        const mainContent = document.getElementById('mainContent');
+                        if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' });
                     } else if (mode === 'shop') {
-                        // 跳转到莫语商店页面
+                        // 前往莫语商店页
                         window.location.href = 'https://momocat.online/store/mo';
                     }
                 }
@@ -594,7 +596,7 @@
                         setMode(mode);
                     });
                 });
-                // 初始高亮主页
+                // 初始化时只高亮主页，不跳转
                 setMode('home');
             }
 
