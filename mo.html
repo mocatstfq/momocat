@@ -453,6 +453,18 @@
         .lang-switch-bar a:hover {
             color: #1d1d1f;
         }
+
+        /* 莫语介绍弹窗专用深色标题 */
+        .mou-intro-dialog .np-body {
+            background: #f9f7f1;
+        }
+        .mou-intro-dialog h2 {
+            color: #1e2c3c;
+        }
+        .mou-intro-dialog h3 {
+            color: #2d3a4a;
+            border-bottom-color: rgba(45,58,74,0.2);
+        }
     </style>
 </head>
 <body>
@@ -541,22 +553,52 @@
         </div>
     </div>
 
-    <!-- 莫语介绍弹窗 -->
+    <!-- 莫语介绍弹窗 (详细参考文档) -->
     <div class="novel-preview-overlay" id="mouIntroOverlay">
-        <div class="novel-preview-dialog" style="max-width: 700px;">
+        <div class="novel-preview-dialog mou-intro-dialog" style="max-width: 780px; background: #f9f7f1;">
             <button class="np-close-btn" id="mouIntroCloseBtn">✕</button>
-            <div class="np-body" style="padding: 36px;">
-                <h2 style="font-weight:800; margin-bottom:20px;">📘 Kamm nnkwo Moumauakattiesrt</h2>
-                <p><strong>Moumauakattiesrt（莫语）</strong> 是一门独立构建的人工语言，语序为「谁 + 什么 + 干 + 状态」（SOV），通过后缀表达时态、体、语气及敬语。</p>
-                <h3>🔤 发音与拼写</h3>
-                <p>使用标准拉丁字母，辅音群 <strong>th、sh、zh、cs、czsh</strong> 等赋予音节独特节奏。元音组合 <strong>ai、ei、ou、au</strong> 等仿照日耳曼语长音。双写字母（如 tto、kann）表示长辅音或长元音。</p>
-                <h3>📚 核心词汇</h3>
-                <p>基础 100 词由英语音位转写并拉伸演变，例如 <strong>the → thi, be → bie, have → havf, go → qtoo</strong>。同时拥有人称代词系统（ir = 我，jyuee = 你，czshii = 她）。</p>
-                <h3>📐 语法骨架</h3>
-                <p>句子必须包含状态标记：<strong>-ta</strong> 完成/过去，<strong>-ne</strong> 进行，<strong>-sa</strong> 将来，<strong>-wi</strong> 可能，<strong>-meow</strong> 请求，<strong>-purr</strong> 祈使。否定 <strong>nne</strong> 置于动词与标记之间。形容词后置于名词，比较级加 <strong>-moar</strong>，最高级加 <strong>-moost</strong>。</p>
-                <h3>🖊️ 书写与礼仪</h3>
-                <p>传统上使用「爪体」手写，现代支持横排印刷。敬语后缀 <strong>-san</strong> 用于尊称，句末加 <strong>meow</strong> 或 <strong>purr</strong> 表示亲密或命令。数字采用五进制组合。</p>
-                <p style="margin-top:24px;">✨ 莫语承载着故事《寄往1999的信》中“光阴匣”的时空密码，也在 momocat.online/mo 上等你来探索。</p>
+            <div class="np-body" style="padding: 36px; background: transparent;">
+                <h2 style="font-weight:800; margin-bottom:20px; color:#1e2c3c;">📘 Kamm nnkwo Moumauakattiesrt（莫语参考文档）</h2>
+                <p><strong>Moumauakattiesrt（莫语）</strong> 是一门独立构建的人工语言，专为特定世界观设计。其语法骨架为 SOV（主-宾-动），语序为「谁 + 什么 + 干 + 状态」。状态标记不可或缺，承载时、体、式、情态及敬语。以下为完整语法参考。</p>
+
+                <h3>🔤 一、音系与正字法</h3>
+                <p>使用标准拉丁字母，无附加符号。辅音群 <strong>th /θ/、sh /ʃ/、zh /ʒ/、cs /ts/、czsh /tʃ/</strong> 等赋予独特节奏。元音组合 <strong>ai、ei、oi、au、ou、ie</strong> 等仿照日耳曼语长音系统。双写字母（如 tto、kann）表示长辅音或长元音，装饰性前缀 vf-、db-、hq- 不改变重音。重音落在第一个长元音或长辅音音节上，否则在倒数第二音节。</p>
+
+                <h3>📚 二、词汇构成</h3>
+                <p>基础 100 词由英语音位转写并拉伸演变，例：<strong>the → thi, be → bie, have → havf, go → qtoo, for → vfoer, but → dbatt</strong>。人称代词系统：ir（我）、jyuee（你）、hii（他）、czshii（她）、eht（它）、mwe（我们）、zazeet（他们）等，并区分主格、宾格、属格。</p>
+                <p><strong>派生规则：</strong>词首 f 变 vf；s+前元音变 cs；sh 变 czsh；g+后元音变 q；b+ʌ 变 db；词尾 v 变 vf。元音对应：/iː/ → ie/ii；/ɪ/ → ei/eh；/eɪ/ → ay/ai；/æ/ → a/ue；/ʌ/ → a/u；/aʊ/ → ao/ou 等。</p>
+
+                <h3>📐 三、基础语法骨架</h3>
+                <p><strong>语序：</strong>S-O-V-状态。句子可无宾语，但动词后必须跟随状态标记。</p>
+                <p><strong>状态标记表：</strong></p>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>-∅</strong> 一般现在/习惯</li>
+                    <li><strong>-ta</strong> 过去/完成</li>
+                    <li><strong>-ne</strong> 进行/持续</li>
+                    <li><strong>-sa</strong> 将来</li>
+                    <li><strong>-wi</strong> 可能/能力</li>
+                    <li><strong>-ka</strong> 疑问</li>
+                    <li><strong>-meow</strong> 意愿/请求</li>
+                    <li><strong>-purr</strong> 祈使/命令</li>
+                </ul>
+                <p>否定语素 <strong>nne</strong> 置于动词词干与状态标记之间。情态动词可独立带标记，后接原形动词置句末。如：<em>Ir kann teke.</em>（我能拿）<em>Hii qtoo-sa-ka?</em>（他会去吗？）</p>
+
+                <h3>🧩 四、名词与代词</h3>
+                <p>名词不标记复数，复数由数量词或语境表达。格关系由介词决定：ove（的/给）、ein（在…内）、oen（在…上）、vftpoom（从）、wifz（和…一起）等。属格用 ove 连接，如 <em>hii ove werk</em>（他的工作）。指示词 thi、ztidsz、zat 置于名词前表示定指。</p>
+
+                <h3>⚙️ 五、动词与体统</h3>
+                <p>动词词干以元音结尾居多，可叠加体标记：完成 -ta，进行 -ne，习惯 -kwo，起始 -start，继续 -goen。时与体融合，过去时常用 -ta，将来时 -sa。被动语态用 <strong>bie + 动词-ed</strong> 构成，施事由 bi 引出：<em>Zer csai-ed bie-ta.</em>（我被说了）。使动使用 aymaykee（让）作为助动词。</p>
+
+                <h3>📝 六、形容词与副词</h3>
+                <p>形容词后置于名词：<em>taim goud</em>（好时光）。比较级加 -moar，最高级加 -moost：goud-moar（更好）、goud-moost（最好）。副词由形容词加 -li 构成，置于动词前。</p>
+
+                <h3>❓ 七、疑问与从句</h3>
+                <p>一般疑问加 -ka；特殊疑问词（warrt 什么、hoo 谁、whein 何时、hao 如何）放句首。关系从句用 zat 引导，置于名词后，从句动词仍需状态标记。</p>
+
+                <h3>🖊️ 八、书写与敬语</h3>
+                <p>传统上使用爪体手写，现代支持横排。敬称后缀 -san 用于尊长或陌生人，请求加 -meow，命令用 -purr。数字采用五进制组合，如 wuoun(1)、ttwo(2)、pemp(5)、zemp(6) 等。</p>
+
+                <p style="margin-top:24px; font-style:italic;">✨ 莫语承载着《寄往1999的信》中「光阴匣」的时空密码，也在这片语言结构中等待你的探索 —— momocat.online/mo</p>
             </div>
         </div>
     </div>
@@ -589,12 +631,8 @@
             function initCapsuleAutoCollapse() {
                 const switcher = document.getElementById('modeSwitcher');
                 const header = document.querySelector('.site-header');
-                header.addEventListener('mouseenter', () => {
-                    switcher.classList.add('expanded');
-                });
-                header.addEventListener('mouseleave', () => {
-                    switcher.classList.remove('expanded');
-                });
+                header.addEventListener('mouseenter', () => { switcher.classList.add('expanded'); });
+                header.addEventListener('mouseleave', () => { switcher.classList.remove('expanded'); });
             }
 
             function initModeSwitcher() {
@@ -810,7 +848,7 @@
                 novelPreviewOverlay.addEventListener('click', function(e) { if (e.target === novelPreviewOverlay) closeNovelPreview(); });
                 document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && novelPreviewOverlay.classList.contains('show')) closeNovelPreview(); });
 
-                // 莫语介绍弹窗控制
+                // 莫语介绍弹窗
                 const mouIntroOverlay = document.getElementById('mouIntroOverlay');
                 const mouIntroCloseBtn = document.getElementById('mouIntroCloseBtn');
                 document.getElementById('mouIntroCard').addEventListener('click', () => {
