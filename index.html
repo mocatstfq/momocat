@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>Momocat 莫猫 (中国官网)</title>
+    <title>问题少年 at Momocat</title>
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,31 +11,27 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif !important; }
         body {
-            background-color: #fbfbfd;
+            background-color: #f0f4fc;
             font-family: 'Inter', sans-serif !important;
             -webkit-font-smoothing: antialiased;
             height: 100vh; display: flex; align-items: flex-start; justify-content: center;
-            overflow: hidden; color: #1d1d1f;
-            --rubber-card-gap: clamp(16px, 2vw, 24px);
-            --rubber-section-padding: clamp(16px, 3vw, 32px);
-            --pink-theme: #FF8A9E;
-            --pink-hover: #FF7088;
-        }
-        body, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, select, textarea {
-            font-family: 'Inter', sans-serif !important;
+            overflow: hidden; color: #0b1e3c;
+            --blue-primary: #0071e3;
+            --blue-dark: #003c8f;
+            --blue-light: #e8f1fc;
         }
 
-        /* ========== 胶囊导航栏 ========== */
+        /* ========== 胶囊导航栏（保留） ========== */
         .site-header {
             position: fixed;
             top: 10px; left: 50%; transform: translateX(-50%);
             width: auto; min-width: fit-content;
             padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 14px);
-            background-color: rgba(251, 251, 253, 0.55);
+            background-color: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(35px) saturate(200%);
             -webkit-backdrop-filter: blur(35px) saturate(200%);
             border-radius: 80px;
-            border: 0.8px solid rgba(0, 0, 0, 0.08);
+            border: 0.8px solid rgba(0, 113, 227, 0.15);
             box-shadow: 0 2px 10px rgba(0,0,0,0.04), 0 8px 20px rgba(0,0,0,0.02);
             z-index: 1000;
             display: flex; align-items: center; justify-content: center;
@@ -45,7 +41,7 @@
         }
         .header-title {
             font-weight: 700; font-size: clamp(1.4rem, 3.5vw, 2rem);
-            letter-spacing: -0.02em; color: #1d1d1f;
+            letter-spacing: -0.02em; color: #0b1e3c;
             padding: clamp(3px, 0.8vw, 6px) clamp(12px, 2vw, 18px);
             user-select: none; white-space: nowrap; flex-shrink: 0;
             cursor: pointer;
@@ -54,15 +50,15 @@
             transition: background-color 0.2s ease;
         }
         .header-title:hover {
-            background-color: rgba(0, 0, 0, 0.03);
+            background-color: rgba(0, 113, 227, 0.06);
         }
 
         .mode-switcher {
             display: flex; align-items: center;
-            background: rgba(255, 255, 255, 0.6); border-radius: 60px;
+            background: rgba(255, 255, 255, 0.7); border-radius: 60px;
             padding: 3px;
-            border: 0.5px solid rgba(0, 0, 0, 0.06);
-            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.02);
+            border: 0.5px solid rgba(0, 113, 227, 0.15);
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
             flex-shrink: 0; position: relative;
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
@@ -85,402 +81,225 @@
             padding: clamp(5px, 0.6vw, 8px) clamp(10px, 1.5vw, 18px);
             border-radius: 40px;
             font-size: clamp(0.7rem, 1vw, 0.9rem); font-weight: 500;
-            color: #6e6e73; cursor: pointer;
+            color: #5a6b82; cursor: pointer;
             transition: all 0.25s cubic-bezier(0.2, 0.8, 0.3, 1.2);
             background: transparent; border: none; outline: none;
             user-select: none; white-space: nowrap; letter-spacing: 0.01em;
         }
-        .mode-option:hover { color: #1d1d1f; }
+        .mode-option:hover { color: #0b1e3c; }
         .mode-option.active {
-            background: #e6f0fa; color: #0071e3; font-weight: 600;
-            box-shadow: 0 1px 6px rgba(0, 113, 227, 0.08);
+            background: #d9e9ff; color: #0071e3; font-weight: 600;
+            box-shadow: 0 1px 6px rgba(0, 113, 227, 0.15);
         }
         .mode-option svg {
             width: clamp(12px, 1vw, 16px); height: clamp(12px, 1vw, 16px);
             flex-shrink: 0; display: block; transition: stroke 0.2s, fill 0.2s;
         }
-        .mode-option:not([data-mode="home"]) svg * { stroke: #86868b; fill: none; }
+        .mode-option:not([data-mode="home"]) svg * { stroke: #5a6b82; fill: none; }
         .mode-option:not([data-mode="home"]).active svg * { stroke: #0071e3; fill: none; }
-        .mode-option[data-mode="home"] svg * { fill: #86868b; stroke: none; }
+        .mode-option[data-mode="home"] svg * { fill: #5a6b82; stroke: none; }
         .mode-option[data-mode="home"].active svg * { fill: #0071e3; stroke: none; }
 
-        /* ========== 原有首页样式 ========== */
+        /* ========== 主内容容器 ========== */
         .main-content {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             overflow-y: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin; scrollbar-color: #c8c8ce transparent;
+            scrollbar-width: thin; scrollbar-color: #a0b8d0 transparent;
             overscroll-behavior-y: contain;
-            padding-bottom: calc(var(--rubber-section-padding) * 1.5);
-        }
-        .main-content::-webkit-scrollbar { width: 6px; }
-        .main-content::-webkit-scrollbar-track { background: transparent; }
-        .main-content::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
-
-        .cover-card {
-            width: 100%; background-color: #e0e0e5;
-            padding: clamp(50px, 8vw, 80px) clamp(20px, 5vw, 40px);
-            text-align: center; position: relative; overflow: hidden;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: #1d1d1f; min-height: clamp(320px, 40vw, 420px);
-            border: 0 solid transparent;
-            border-image: repeating-linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a18cd1, #a18cd1, #fbc2eb, #8fd3f4, #8fd3f4, #ff9a9e) 1;
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.05) inset, 0 0 20px rgba(160, 200, 255, 0.3), 0 0 40px rgba(200, 160, 255, 0.2);
-        }
-        .cover-card::before {
-            content: ""; position: absolute; top: -50%; left: -20%; width: 140%; height: 200%;
-            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.15) 0%, transparent 60%);
-            pointer-events: none; z-index: 1;
-        }
-        .cover-card::after {
-            content: ""; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: skewX(-20deg); animation: fullShine 5s ease-in-out infinite;
-            pointer-events: none; z-index: 1; filter: blur(4px);
-        }
-        @keyframes fullShine {
-            0% { left: -100%; opacity: 0; } 10% { opacity: 1; } 30% { left: 120%; opacity: 1; }
-            40% { left: 120%; opacity: 0; } 100% { left: -100%; opacity: 0; }
-        }
-        .cover-top-left {
-            position: absolute; top: clamp(20px, 3vw, 30px); left: clamp(20px, 3vw, 30px);
-            font-size: clamp(0.8rem, 2vw, 1rem); font-weight: 500; color: #86868b; letter-spacing: 1px; z-index: 4;
-        }
-        .cover-center { position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .cover-title {
-            font-size: clamp(3rem, 12vw, 6rem); font-weight: 700; letter-spacing: -0.03em;
-            color: #1d1d1f; margin-bottom: clamp(24px, 4vw, 36px); line-height: 1.1;
-        }
-        .card-btn {
-            background: #0071e3; border: 1.5px solid #0071e3; color: #ffffff;
-            padding: clamp(8px, 1.5vw, 12px) clamp(20px, 3vw, 28px); border-radius: 40px;
-            font-weight: 500; font-size: clamp(0.95rem, 2.5vw, 1.1rem); text-decoration: none;
-            transition: all 0.2s ease; white-space: nowrap; display: inline-flex; align-items: center;
-            cursor: pointer; min-height: 44px;
-        }
-        .card-btn:hover { background: #005bb5; border-color: #005bb5; }
-        .card-btn:active { transform: scale(0.97); }
-
-        /* 新增边框按钮样式 */
-        .card-btn-outline {
-            background: transparent;
-            border: 1.5px solid #0071e3;
-            color: #0071e3;
-            padding: clamp(8px, 1.5vw, 12px) clamp(20px, 3vw, 28px);
-            border-radius: 40px;
-            font-weight: 500;
-            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            min-height: 44px;
-            margin-left: 12px;
-        }
-        .card-btn-outline:hover {
-            background: #0071e3;
-            color: #ffffff;
-        }
-        .card-btn-outline:active { transform: scale(0.97); }
-
-        .content-inner {
-            padding: var(--rubber-section-padding) var(--rubber-section-padding) 0;
-            display: grid; grid-template-columns: 1fr; gap: var(--rubber-card-gap); align-items: start;
-        }
-        @media (min-width: 1024px) {
-            .content-inner { grid-template-columns: 1fr 1fr; max-width: 1400px; margin: 0 auto; }
-            .new-rule-card, .redeem-card, .novel-new-card { max-width: 100%; width: 100%; }
+            padding-bottom: 40px;
         }
 
-        .new-rule-card, .redeem-card, .novel-new-card {
-            width: 100%; max-width: 640px; margin: 0 auto; aspect-ratio: 16 / 9;
-            border-radius: clamp(20px, 3vw, 28px);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.02), 0 8px 24px rgba(0,0,0,0.04);
-            position: relative; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 0.5px solid rgba(0,0,0,0.04); cursor: pointer;
-        }
-        .new-rule-card:hover, .redeem-card:hover, .novel-new-card:hover {
-            transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-        }
-        .new-rule-card:active, .redeem-card:active, .novel-new-card:active {
-            transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
-
-        .redeem-card { background: #2A1A1A; }
-        .novel-new-card { background: linear-gradient(135deg, #FFA500, #FFD700); }
-
-        /* 隐藏新制度卡片 */
-        #newRuleCard { display: none; }
-
-        .new-rule-center, .redeem-center, .novel-center {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            text-align: center; z-index: 2; pointer-events: none;
-        }
-        .new-rule-title {
-            font-size: clamp(2.5rem, 8vw, 3.5rem); font-weight: 700; letter-spacing: -0.02em;
-            color: #1d1d1f; line-height: 1.2; margin-bottom: 8px;
-        }
-        .redeem-center .new-rule-title {
-            font-size: clamp(1.6rem, 4vw, 2.4rem); max-width: 90%; color: #FFB7C5;
-        }
-        .novel-center .new-rule-title {
-            color: #ffffff; font-size: clamp(1.8rem, 5vw, 2.8rem); white-space: nowrap;
-        }
-
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.35); backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px); z-index: 50; display: flex;
-            align-items: center; justify-content: center; visibility: hidden; opacity: 0;
-            transition: visibility 0.2s, opacity 0.2s;
-        }
-        .modal-overlay.show { visibility: visible; opacity: 1; }
-        .modal-dialog {
-            background: white; border-radius: 28px; max-width: 620px; width: 90%; max-height: 85vh;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.12); position: relative; z-index: 51;
-            display: flex; flex-direction: column; overflow: hidden; padding: 0;
-        }
-        .modal-close-btn {
-            position: absolute; top: 16px; left: 16px; width: 36px; height: 36px;
-            border-radius: 50%; background-color: #e5e5ea; border: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: background-color 0.2s, transform 0.1s; z-index: 6;
-        }
-        .modal-close-btn:hover { background-color: #d1d1d6; }
-        .modal-close-btn:active { transform: scale(0.9); }
-        .modal-close-btn svg { width: 16px; height: 16px; stroke: #1d1d1f; stroke-width: 2; }
-
-        .modal-content-area {
-            overflow-y: auto; padding: 0; scrollbar-width: thin; scrollbar-color: #c8c8ce transparent; z-index: 1; flex: 1;
-        }
-        .modal-content-area::-webkit-scrollbar { width: 6px; }
-        .modal-content-area::-webkit-scrollbar-track { background: transparent; }
-        .modal-content-area::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
-
-        .redeem-input { width: 100%; padding: 12px 16px; border-radius: 40px; border: 1.2px solid rgba(0,0,0,0.15); font-size: 0.95rem; color: #1d1d1f; background: #fbfbfd; margin-top: 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; min-height: 44px; }
-        .redeem-input:focus { border-color: var(--pink-theme); box-shadow: 0 0 0 3px rgba(255,138,158,0.15); }
-
-        .redeem-btn-inner { display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1.5px solid var(--pink-theme); color: var(--pink-theme); padding: 10px 24px; border-radius: 40px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; margin-top: 16px; white-space: nowrap; min-height: 44px; }
-        .redeem-btn-inner:hover { background-color: var(--pink-theme); color: white; }
-        .redeem-btn-inner:active { transform: scale(0.97); }
-        .redeem-feedback { text-align: center; margin-top: 12px; font-size: 0.9rem; min-height: 24px; }
-
-        .result-item-card {
-            background: #fdf5f6; border: 1px solid rgba(255,138,158,0.2); border-radius: 20px;
-            padding: 20px 24px; margin-bottom: 10px; text-align: left; transition: all 0.2s ease;
-        }
-        .result-item-card:hover { background: #fef0f2; border-color: rgba(255,138,158,0.4); }
-        .result-item-title { font-weight: 700; font-size: 1rem; color: #1d1d1f; margin-bottom: 4px; }
-        .result-item-code { font-size: 0.8rem; color: #FF8A9E; font-family: monospace; letter-spacing: 0.5px; }
-        .result-placeholder { display: inline-block; background: rgba(255,138,158,0.1); padding: 3px 10px; border-radius: 30px; font-size: 0.7rem; color: #FF8A9E; margin-top: 6px; }
-
-        .rules-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.35); backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px); z-index: 52; display: flex;
-            align-items: center; justify-content: center; visibility: hidden; opacity: 0;
-            transition: visibility 0.2s, opacity 0.2s;
-        }
-        .rules-modal-overlay.show { visibility: visible; opacity: 1; }
-        .rules-modal-dialog {
-            background: white; border-radius: 28px; max-width: 900px; width: 90%; height: 80vh;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.12); position: relative; z-index: 53;
-            display: flex; flex-direction: column; overflow: hidden; padding: 0;
-        }
-        .rules-content {
-            overflow-y: auto; flex: 1; padding: 0; scrollbar-width: thin; scrollbar-color: #c8c8ce transparent;
-        }
-        .rules-content::-webkit-scrollbar { width: 6px; }
-        .rules-content::-webkit-scrollbar-track { background: transparent; }
-        .rules-content::-webkit-scrollbar-thumb { background: #c8c8ce; border-radius: 3px; }
-
-        .novel-preview-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); z-index: 55; display: flex;
-            align-items: center; justify-content: center; visibility: hidden; opacity: 0;
-            transition: visibility 0.25s, opacity 0.3s;
-        }
-        .novel-preview-overlay.show { visibility: visible; opacity: 1; }
-
-        .novel-preview-dialog {
-            background: #fdfaf5;
-            border-radius: 32px;
-            max-width: 800px;
-            width: 92%;
-            max-height: 88vh;
-            box-shadow: 0 20px 48px rgba(0,0,0,0.15);
+        /* ========== 播客预告 Hero ========== */
+        .podcast-hero {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #d9e9ff 0%, #b0d0f5 40%, #8ab8f0 100%);
             position: relative;
-            z-index: 56;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            padding: 0;
-        }
-
-        .np-header {
-            background: linear-gradient(135deg, #f5e6d3, #fdf0e0);
-            padding: 32px 36px 24px 36px;
-            border-bottom: 1px solid rgba(180,140,100,0.15);
-            position: relative;
-            flex-shrink: 0;
-        }
-        .np-header-tag {
-            display: inline-block;
-            background: rgba(200,140,80,0.15);
-            color: #b8763e;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            padding: 4px 14px;
-            border-radius: 30px;
-            margin-bottom: 14px;
-            text-transform: uppercase;
-        }
-        .np-header h2 {
-            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: #1d1d1f;
-            line-height: 1.25;
-            margin-bottom: 6px;
-        }
-        .np-header h2 span {
-            background: linear-gradient(135deg, #c47a3a, #e0a050);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .np-header .np-sub {
-            font-size: 0.9rem;
-            color: #8b6f5a;
-            font-weight: 500;
-            margin-top: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .np-body {
-            overflow-y: auto;
-            padding: 28px 36px 36px;
-            scrollbar-width: thin;
-            scrollbar-color: #d0c0a8 transparent;
-            flex: 1;
-        }
-        .np-body::-webkit-scrollbar { width: 5px; }
-        .np-body::-webkit-scrollbar-track { background: transparent; }
-        .np-body::-webkit-scrollbar-thumb { background: #d0c0a8; border-radius: 3px; }
-
-        .np-body h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #1d1d1f;
-            margin: 1.8em 0 0.6em 0;
-            letter-spacing: -0.01em;
-            padding-bottom: 6px;
-            border-bottom: 1.5px solid rgba(180,140,100,0.15);
-        }
-        .np-body h3:first-of-type { margin-top: 0; }
-
-        .np-body p {
-            font-size: 0.95rem;
-            color: #3a3a3c;
-            line-height: 1.75;
-            margin-bottom: 0.9em;
-            letter-spacing: 0.01em;
-        }
-        .np-body p strong {
-            color: #c47a3a;
-            font-weight: 600;
-        }
-
-        .np-body .blockquote {
-            margin: 1.2em 0;
-            padding: 16px 20px;
-            background: #fdf5ec;
-            border-left: 4px solid #d0a060;
-            border-radius: 0 12px 12px 0;
-            color: #5c4033;
-            font-style: italic;
-            line-height: 1.7;
-            font-size: 0.9rem;
-        }
-
-        .np-body .divider-line {
-            border: none;
-            border-top: 1px dashed rgba(180,140,100,0.25);
-            margin: 1.5em 0;
-        }
-
-        .np-footer {
-            background: #fdf5ec;
-            padding: 20px 36px;
-            border-top: 1px solid rgba(180,140,100,0.12);
-            text-align: center;
-            flex-shrink: 0;
-        }
-        .np-footer p {
-            font-size: 0.85rem;
-            color: #8b6f5a;
-            letter-spacing: 0.02em;
-        }
-        .np-footer strong {
-            color: #c47a3a;
-            font-weight: 700;
-        }
-
-        .np-close-btn {
-            position: absolute;
-            top: 16px;
-            right: 20px;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(200,160,120,0.15);
-            border: none;
-            cursor: pointer;
-            display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-            z-index: 6;
-            color: #8b6f5a;
-            font-size: 1.2rem;
-            font-weight: 500;
+            text-align: center;
+            padding: 40px 20px;
+            overflow: hidden;
         }
-        .np-close-btn:hover {
-            background: rgba(200,160,120,0.3);
-            transform: scale(1.08);
+        /* 动态波纹背景装饰 */
+        .podcast-hero::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 120%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.3) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBg 8s ease-in-out infinite alternate;
+        }
+        @keyframes floatBg {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(2%, 1%) scale(1.05); }
         }
 
-        /* ========== 底部语言切换栏 ========== */
+        /* 音频波形装饰 */
+        .wave-decoration {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C100,10 200,70 300,40 C400,10 500,70 600,40 C700,10 800,70 900,40 C1000,10 1100,70 1200,40 L1200,80 L0,80 Z' fill='rgba(255,255,255,0.35)'/%3E%3C/svg%3E") repeat-x;
+            background-size: 600px 80px;
+            opacity: 0.6;
+            z-index: 1;
+            animation: waveMove 12s linear infinite;
+        }
+        @keyframes waveMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 600px 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .podcast-icon {
+            font-size: clamp(4rem, 12vw, 6rem);
+            filter: drop-shadow(0 4px 12px rgba(0,113,227,0.3));
+            animation: bounce 2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        .podcast-label {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #003c8f;
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(8px);
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-weight: 600;
+            margin-bottom: -8px;
+        }
+
+        .podcast-title {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #002856;
+            line-height: 1.1;
+            text-shadow: 0 2px 8px rgba(255,255,255,0.5);
+        }
+
+        .podcast-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: #1e3b5a;
+            font-weight: 500;
+            max-width: 500px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .podcast-description {
+            font-size: 0.95rem;
+            color: #2c4a6e;
+            max-width: 480px;
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(12px);
+            padding: 18px 24px;
+            border-radius: 28px;
+            border: 0.8px solid rgba(0,113,227,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            line-height: 1.6;
+        }
+
+        .launch-date {
+            font-weight: 700;
+            color: #003c8f;
+            background: #ffffffcc;
+            backdrop-filter: blur(8px);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 0.5px solid rgba(0,113,227,0.2);
+        }
+
+        .cta-button {
+            background: #0071e3;
+            border: none;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0,113,227,0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cta-button:hover {
+            background: #005bb5;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0,113,227,0.4);
+        }
+        .cta-button:active {
+            transform: scale(0.97);
+        }
+
+        /* 底部语言切换栏 */
         .lang-switch-bar {
             text-align: center;
             padding: 20px 16px;
             font-size: 0.9rem;
-            border-top: 1px solid rgba(0,0,0,0.06);
-            margin-top: 48px;
-            background: rgba(251, 251, 253, 0.5);
+            border-top: 1px solid rgba(0,113,227,0.1);
+            margin-top: -1px;
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            color: #2c4a6e;
         }
         .lang-switch-bar .lang-active {
             font-weight: 600;
-            color: #1d1d1f;
+            color: #0b1e3c;
             cursor: default;
         }
         .lang-switch-bar .lang-divider {
             margin: 0 12px;
-            color: #ccc;
+            color: #b0c8dd;
             user-select: none;
         }
         .lang-switch-bar a {
-            color: #6e6e73;
+            color: #5a6b82;
             text-decoration: none;
             transition: color 0.2s;
             cursor: pointer;
         }
         .lang-switch-bar a:hover {
-            color: #1d1d1f;
+            color: #0b1e3c;
+        }
+
+        @media (max-width: 600px) {
+            .podcast-hero {
+                padding: 24px 16px;
+            }
+            .hero-content {
+                gap: 18px;
+            }
         }
     </style>
 </head>
@@ -500,36 +319,25 @@
     </header>
 
     <div class="main-content" id="mainContent">
-        <div class="cover-card" id="coverCard">
-            <div class="cover-top-left">新Headline</div>
-            <div class="cover-center">
-                <h1 class="cover-title">线上活动</h1>
-                <div style="display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://www.bilibili.com/video/BV1heRjBiE36" target="_blank" class="card-btn">看个究竟</a>
-                    <button class="card-btn-outline" id="newRuleBtn">看看新制度</button>
+        <section class="podcast-hero">
+            <div class="wave-decoration"></div>
+            <div class="hero-content">
+                <div class="podcast-icon">🎙️</div>
+                <span class="podcast-label">Momocat 全新播客企划</span>
+                <h1 class="podcast-title">问题少年</h1>
+                <p class="podcast-subtitle">每⼀个“问题”背后，都藏着⼀个未被听见的少年。</p>
+                <div class="podcast-description">
+                    真实故事 · 深度对话 · 每周五晚更新<br>
+                    主播莫猫邀请你一起，重新理解那些被贴上标签的青春。
                 </div>
+                <div class="launch-date">🎧 2026年7月4日 首播上线</div>
+                <a href="#" class="cta-button" id="subscribeBtn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    订阅更新提醒
+                </a>
             </div>
-        </div>
+        </section>
 
-        <div class="content-inner">
-            <div class="new-rule-card" id="newRuleCard">
-                <div class="new-rule-center"><div class="new-rule-title">2026 MOMOREAD<br>新制度</div></div>
-            </div>
-
-            <div class="redeem-card" id="redeemCard">
-                <div class="redeem-center">
-                    <div class="new-rule-title">兑换在 Moc Store 购买的电子作品 - Beta</div>
-                </div>
-            </div>
-
-            <div class="novel-new-card" id="novelNewCard">
-                <div class="novel-center">
-                    <div class="new-rule-title">新小说 寄往1999的信</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 底部语言切换 -->
         <div class="lang-switch-bar">
             <span class="lang-active">中文（中国大陆）</span>
             <span class="lang-divider">|</span>
@@ -537,424 +345,50 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-dialog" id="modalDialog">
-            <button class="modal-close-btn" id="modalCloseBtn"><svg viewBox="0 0 14 14" fill="none"><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-            <div class="modal-content-area" id="modalContentArea"></div>
-        </div>
-    </div>
-
-    <div class="rules-modal-overlay" id="rulesModalOverlay">
-        <div class="rules-modal-dialog" id="rulesModalDialog">
-            <button class="modal-close-btn" id="rulesCloseBtn" style="position:absolute; top:16px; left:16px; z-index:5;"><svg viewBox="0 0 14 14" fill="none"><line x1="1" y1="1" x2="13" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="13" y1="1" x2="1" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-            <div class="rules-content" id="rulesContent"></div>
-        </div>
-    </div>
-
-    <div class="novel-preview-overlay" id="novelPreviewOverlay">
-        <div class="novel-preview-dialog">
-            <button class="np-close-btn" id="novelPreviewCloseBtn">✕</button>
-            <div class="np-header">
-                <div class="np-header-tag">📖 2026 Momoread 年度新作 · 正式预告</div>
-                <h2>《寄往<span>1999</span>的信》即将上线</h2>
-                <div class="np-sub">一封写给母亲青春的告白，也是一场二十五年的秘密守护</div>
-            </div>
-            <div class="np-body" id="novelPreviewBody">
-                <!-- 动态填充 -->
-            </div>
-            <div class="np-footer">
-                <p><strong>《寄往1999的信》· 莫川读书会2026年度新作</strong></p>
-                <p>一封信，两个人，二十五年的沉默。即将上线，敬请期待。</p>
-            </div>
-        </div>
-    </div>
-
     <script>
         (function() {
-            const SmoothScrollEngine = { init: function() {} };
-            const RubberEngine = {
-                breakpoints: { phone: 600, tablet: 1024, desktop: 1440 },
-                currentDevice: 'desktop',
-                init: function() { this._detectAndApply(); this._bindEvents(); },
-                _detectAndApply: function() {
-                    const width = window.innerWidth; const body = document.body;
-                    body.classList.remove('rubber-phone', 'rubber-tablet', 'rubber-desktop', 'rubber-wide');
-                    let device;
-                    if (width < this.breakpoints.phone) { body.classList.add('rubber-phone'); device = 'phone'; }
-                    else if (width < this.breakpoints.tablet) { body.classList.add('rubber-tablet'); device = 'tablet'; }
-                    else if (width < this.breakpoints.desktop) { body.classList.add('rubber-desktop'); device = 'desktop'; }
-                    else { body.classList.add('rubber-wide'); device = 'wide'; }
-                    this.currentDevice = device;
-                    body.setAttribute('data-rubber-device', device);
-                },
-                _bindEvents: function() {
-                    let resizeTimer;
-                    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => this._detectAndApply(), 100); });
-                    window.addEventListener('orientationchange', () => { setTimeout(() => this._detectAndApply(), 50); });
-                }
-            };
+            // 胶囊动画控制
+            const switcher = document.getElementById('modeSwitcher');
+            const header = document.querySelector('.site-header');
+            header.addEventListener('mouseenter', () => {
+                switcher.classList.add('expanded');
+            });
+            header.addEventListener('mouseleave', () => {
+                switcher.classList.remove('expanded');
+            });
 
-            function initCapsuleAutoCollapse() {
-                const switcher = document.getElementById('modeSwitcher');
-                const header = document.querySelector('.site-header');
-                header.addEventListener('mouseenter', () => {
-                    switcher.classList.add('expanded');
-                });
-                header.addEventListener('mouseleave', () => {
-                    switcher.classList.remove('expanded');
-                });
-            }
-
-            function initModeSwitcher() {
-                const options = document.querySelectorAll('.mode-option');
-                function setMode(mode) {
-                    options.forEach(btn => {
-                        const isActive = btn.dataset.mode === mode;
-                        btn.classList.toggle('active', isActive);
-                    });
-                    if (mode === 'home') {
-                        const mainContent = document.getElementById('mainContent');
-                        if (mainContent) mainContent.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else if (mode === 'shop') {
-                        window.location.href = 'store';
-                    }
-                }
+            // 模式切换
+            const options = document.querySelectorAll('.mode-option');
+            function setMode(mode) {
                 options.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const mode = this.dataset.mode;
-                        if (this.classList.contains('active')) return;
-                        setMode(mode);
-                    });
+                    const isActive = btn.dataset.mode === mode;
+                    btn.classList.toggle('active', isActive);
                 });
-                setMode('home');
-            }
-
-            function buildNovelPreview() {
-                const body = document.getElementById('novelPreviewBody');
-                body.innerHTML = `
-                    <p><strong>河北/Momoread读书会讯</strong></p>
-                    <p>如果有一天，你能和17岁的妈妈成为笔友，你会对她说什么？</p>
-                    <p>是警告她别走那条辛苦的路，还是告诉她，你长大后变成了我最不想成为的那种妈妈？</p>
-                    <p>如果有一天，你发现自己可以改写母亲的过去、抹掉她所有的心碎和遗憾——但代价是，你自己会从这个世界上消失，你还会不会动笔？</p>
-                    <p>这些问题，即将在莫川读书会2026年度新作《寄往1999的信》中被一一打开。今天，我们正式为这部由莫川团队倾力打造、讲述母女跨越二十五年时光通信的奇幻情感小说，发布首篇故事预览与创作札记。</p>
-
-                    <hr class="divider-line">
-
-                    <h3>一、故事从一封信开始</h3>
-                    <p>2024年，清明。高三女生季青崖，被母亲许抱真拖回位于城郊的老宅扫墓。老宅常年无人居住，灰尘爬满每一件旧物。为了躲清静，她钻进堆满杂物的阁楼，翻出了一本旧相册。</p>
-                    <p>相册里有一张照片。照片上那个扎马尾、校服袖子卷到手肘、对着镜头笑得露出虎牙的少女，让她愣了许久。照片背面写着：<strong>1999年春，抱真，十七岁。</strong></p>
-                    <p>这个笑得没心没肺的人，是她妈？她完全无法把这个人和自己认识的那个许抱真联系在一起——那个每天垮着脸、说话像审讯、把"你要是考不上大学就完了"挂在嘴边的中年女人。</p>
-                    <p>在相册下面，季青崖找到了一个黄铜匣子，巴掌大小，表面布满两棵交缠的树——一棵银杏，一棵梧桐。匣底刻着两行字：<strong>"寄往不可追，此心即邮程。"</strong></p>
-                    <p>旁边放着一沓发脆的信纸和一支老式钢笔。季青崖不知道自己为什么拿起了笔。可能是因为阁楼太安静了，可能是因为照片上那个少女的笑容太刺眼了。</p>
-                    <p>她抱着玩闹的心态，写下第一行字——</p>
-
-                    <div class="blockquote">
-                        "你好，1999年的许抱真。我叫……一个认识你的人。别问我是谁。"<br>
-                        她写下了高三的压力，写下了想逃的感觉。写到一半，加了一句："你说你讨厌被管，想快点长大离开家。我告诉你，别急。长大以后的事，没你想的那么好。"
-                    </div>
-
-                    <p><strong>第二天清晨，枕头边多了一封信。</strong>信封上的字迹稚嫩但认真，写着三个字：<strong>"季青崖（收）"</strong>。打开信，第一行是：</p>
-
-                    <div class="blockquote">
-                        "你这个人好奇怪。你怎么知道我讨厌被管？你怎么知道我家住哪？"<br>
-                        落款是：许抱真，1999年4月6日。
-                    </div>
-
-                    <p><strong>一扇通往二十五年前的门，被一封手写信推开了。</strong></p>
-
-                    <hr class="divider-line">
-
-                    <h3>二、她能改变过去——但代价是什么？</h3>
-                    <p>随着通信的深入，季青崖逐渐摸清了规则。那个黄铜匣子——她后来在匣底发现了一个名字，<strong>"光阴匣"</strong>——只允许她主动发起通信。只有当她寄出一封信，1999年的许抱真才能回信。时间在两边以相同的速度流逝。</p>
-                    <p>但真正的规则，远比这残酷。每当季青崖通过信件影响许抱真的选择，1999年的时间线就会产生涟漪，向未来扩散。"覆写"掉一切——除了季青崖的记忆。她是唯一一个能同时保留新旧两条时间线记忆的人，这是她作为通信发起者的"特权"，也是她无法与任何人分担的诅咒。</p>
-                    <p>而她很快发现，<strong>每一次改变过去，都不是免费的</strong>。她告诉1999年的许抱真，那个她正在暗恋的、叫沈听舟的男孩，"不是良人"。许抱真照做了。</p>
-                    <p>第二天醒来，季青崖发现家中的相册里多了一张母亲和陌生男人的合照。沈听舟这个名字，从所有的记录里消失了。不只1999年的校园里查无此人。2024年的互联网没有他的痕迹。那条时间线上，从头到尾，没有沈听舟。<strong>只有季青崖还记得。</strong></p>
-                    <p>不止如此，她自己的身体也在发生变化。眩晕、手指偶尔变得透明、镜中的自己似乎变淡了……</p>
-                    <p><strong>救妈妈，还是保自己？</strong>这个问题横亘在17岁的季青崖面前。</p>
-
-                    <hr class="divider-line">
-
-                    <h3>三、两个"同一个人"的隔空相望</h3>
-                    <p>季青崖通过许抱真的信，第一次认识了那个还没有变成妈妈的妈妈。她发现，这个17岁的许抱真，和她自己惊人的相似：讨厌被管、喜欢偷偷写信、对未来既期待又害怕。</p>
-
-                    <div class="blockquote">
-                        "你知道吗，我妈今天又翻我日记了。她管得比太平洋还宽，我快窒息了。等我长大，我绝对不要变成她那样的大人。"
-                    </div>
-
-                    <p>季青崖盯着这行字看了很久。她想笑。因为2024年的许抱真，变成了比她姥姥更可怕的控制狂。但她又觉得难过。因为她忽然明白了：<strong>妈妈不是生来就是这副模样的。</strong></p>
-                    <p>整部小说的情感核心，就建立在这个发现之上：季青崖从一个"讨厌妈妈"的高三女生，一步步变成"认识少女时代的妈妈"的旁观者，再变成"想要守护那个少女"的参与者。</p>
-
-                    <hr class="divider-line">
-
-                    <h3>四、关于沈听舟——那个被时间线抹去的人</h3>
-                    <p>小说中最让人心碎的一条线索，来自一个在2024年时间线上从未存在过的人。沈听舟。1999年，17岁，许抱真隔壁班的男生。成绩好、不太说话、笑起来让人心软、会弹吉他。</p>
-                    <p>当时间线被覆写，沈听舟从许抱真的人生中被彻底抹去。<strong>可他留下的痕迹并没有完全消失。</strong></p>
-                    <p>季青崖在老宅的一口旧樟木箱子里，翻到了一块手帕包着的东西：一条手织的深蓝色围巾，针脚参差不齐；以及一盘TDK空白带，磁带标签上贴着四个手写字——<strong>"梧桐巷"</strong>。</p>
-
-                    <div class="blockquote">
-                        "梧桐巷的梧桐都黄了<br>我站在巷口等了很久<br>如果有一天你不在那里<br>我该往哪儿走"
-                    </div>
-
-                    <p><strong>沈听舟是真的。那条围巾是真的。那首只有两分钟的歌是真的。</strong>而这个世界，不记得他了。只有她一个人，还替他记得。</p>
-
-                    <hr class="divider-line">
-
-                    <h3>五、为什么是"写信"？</h3>
-                    <p>在设定中，那个光阴匣有一条近乎严苛的铁律：<strong>只有手写的文字能穿越时间。</strong>任何现代产物——手机照片、打印件、电子设备——一概被拒之门外。</p>
-                    <p>这意味着，她与年轻母亲之间唯一的沟通方式，是钢笔划过纸面的沙沙声，是墨水干涸前写下的每一个字，是等待回信时那一整天里无法快进的时间。</p>
-                    <p><strong>能够穿越时间的唯一载体，是真诚。</strong>这是本作试图表达的一个隐喻：在即时通讯泛滥的时代，我们什么都说，却很少真正被听见。而写信，反倒成了一种最慢、也因此最不怕被误解的交流方式。</p>
-
-                    <hr class="divider-line">
-
-                    <h3>六、所有故事，最后都会变成信</h3>
-                    <p>目前，《寄往1999的信》已经完成了前五章的定稿工作。整部作品规划为18章，预计于2026年第三季度开始连载，通过莫川读书会的会员信件独家发布。</p>
-                    <p>莫川团队在采访中透露，这部作品的创作灵感来自一个简单的问题：<strong>"如果可以回到过去，你会改变妈妈的哪件事？"</strong></p>
-                    <p>它不是一部大团圆的母女和解喜剧。它的底色有一点点残忍，也有一点点温柔。它讲的是一个女儿，终于有机会认识那个还没来得及被生活磨平棱角的妈妈。而在这个过程中，她不得不面对一个残酷的真相：<strong>妈妈失去的所有可能性，都和她有关。</strong></p>
-
-                    <div class="blockquote">
-                        "许抱真：<br><br>
-                        很多年后，你会变成一个你自己都认不出来的人。你会焦虑、会唠叨、会把担心变成伤人的话。你会让一个女孩觉得你什么都不懂，觉得你是全世界最讨厌的妈妈。<br><br>
-                        但你也会在天还没亮时起床给她做早饭，在她考试前失眠的夜晚陪她坐到天亮。你会用你所有笨拙的方式去爱她。<br><br>
-                        那个女孩现在还不知道。<br>
-                        但我知道了。<br><br>
-                        ——青崖"
-                    </div>
-                `;
-            }
-
-            function init() {
-                SmoothScrollEngine.init();
-                RubberEngine.init();
-                initCapsuleAutoCollapse();
-                initModeSwitcher();
-                buildNovelPreview();
-
-                const redeemItems = {
-                    'monocode039_20250808': { name: '非正式小组 第一季 · 前半本', category: '非正式小组' },
-                    'monocode039_20250809': { name: '非正式小组 第一季 · 后半本', category: '非正式小组' },
-                    'monocode039_nongr1': { name: '非正式小组 第一季 · 整本', category: '非正式小组' },
-                    'monocode040_20260101': { name: '非正式小组 第二季 · 前半本', category: '非正式小组' },
-                    'monocode040_20260102': { name: '非正式小组 第二季 · 后半本', category: '非正式小组' },
-                    'monocode040_nongr2': { name: '非正式小组 第二季 · 整本', category: '非正式小组' },
-                    'monocode039_20250067': { name: '唐人探案 第一季 · 前半本', category: '唐人探案' },
-                    'monocode040_20260067': { name: '唐人探案 第一季 · 后半本', category: '唐人探案' },
-                    'monocode040_tangdt1': { name: '唐人探案 第一季 · 整本', category: '唐人探案' },
-                    'monocode040_20260068': { name: '唐人探案 第二季 · 前半本', category: '唐人探案' },
-                    'monocode040_20260069': { name: '唐人探案 第二季 · 后半本', category: '唐人探案' },
-                    'monocode040_tangdt2': { name: '唐人探案 第二季 · 整本', category: '唐人探案' },
-                };
-                const validCodes = Object.keys(redeemItems);
-                const modalOverlay = document.getElementById('modalOverlay');
-                const modalCloseBtn = document.getElementById('modalCloseBtn');
-                const modalDialog = document.getElementById('modalDialog');
-                const contentArea = document.getElementById('modalContentArea');
-
-                function renderRedeemView(title) {
-                    contentArea.innerHTML = `
-                        <div style="padding: 40px 32px 32px; text-align: center;">
-                            <div style="margin: 0 0 24px; padding: 0; font-weight:700; color:#1d1d1f; font-size:1.8rem;">${title}</div>
-                            <input type="text" id="redeemInput" class="redeem-input" placeholder="在此处输入moc提供给你的兑换码" autocomplete="off">
-                            <button id="redeemBtn" class="redeem-btn-inner">确认兑换</button>
-                            <div id="redeemFeedback" class="redeem-feedback"></div>
-                        </div>
-                    `;
-                    const redeemInput = document.getElementById('redeemInput');
-                    const redeemBtn = document.getElementById('redeemBtn');
-                    const redeemFeedback = document.getElementById('redeemFeedback');
-                    function handleRedeem() {
-                        const val = redeemInput.value.trim();
-                        if (validCodes.includes(val)) {
-                            redeemFeedback.textContent = '✅ 兑换成功！';
-                            redeemFeedback.style.color = '#34c759';
-                            redeemInput.disabled = true;
-                            redeemBtn.disabled = true;
-                            redeemBtn.style.opacity = '0.5';
-                            setTimeout(() => showRedeemResult(val), 600);
-                        } else {
-                            redeemFeedback.textContent = '❌ 兑换码无效，请重试。';
-                            redeemFeedback.style.color = '#ff3b30';
-                        }
-                    }
-                    redeemBtn.addEventListener('click', handleRedeem);
-                    redeemInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); handleRedeem(); } });
-                    setTimeout(() => redeemInput.focus(), 100);
+                if (mode === 'home') {
+                    document.getElementById('mainContent').scrollTo({ top: 0, behavior: 'smooth' });
+                } else if (mode === 'shop') {
+                    window.location.href = 'store';
                 }
-
-                function showRedeemResult(code) {
-                    const item = redeemItems[code];
-                    modalDialog.style.maxWidth = '620px';
-                    modalDialog.style.maxHeight = '85vh';
-                    modalDialog.style.height = '';
-                    contentArea.innerHTML = `
-                        <div style="padding: 40px 32px 32px;">
-                            <div style="margin: 0 0 8px 0; padding: 0; text-align: center; font-weight:700; color:#1d1d1f; font-size:1.8rem;">🎉 兑换成功</div>
-                            <p style="text-align: center; color: #6e6e73; margin-bottom: 24px; font-size: 0.95rem;">你已成功兑换以下电子作品</p>
-                            <div class="result-item-card"><div class="result-item-title">${item.name}</div><div class="result-item-code">兑换码：${code}</div><span class="result-placeholder">📦 内容即将上线</span></div>
-                            <p style="text-align: center; color: #8e8e93; margin-top: 20px; font-size: 0.8rem;">内容上线后将自动关联至你的兑换记录，敬请期待。</p>
-                        </div>
-                    `;
-                }
-
-                function closeModal() { modalOverlay.classList.remove('show'); }
-                modalCloseBtn.addEventListener('click', closeModal);
-                modalOverlay.addEventListener('click', function(e) { if (e.target === modalOverlay) closeModal(); });
-                document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modalOverlay.classList.contains('show')) closeModal(); });
-
-                document.getElementById('redeemCard').addEventListener('click', () => {
-                    modalDialog.style.maxWidth = '800px';
-                    modalDialog.style.maxHeight = '85vh';
-                    modalDialog.style.height = '';
-                    renderRedeemView('兑换在 Moc Store 购买的电子作品 - Beta');
-                    modalOverlay.classList.add('show');
+            }
+            options.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const mode = this.dataset.mode;
+                    if (this.classList.contains('active')) return;
+                    setMode(mode);
                 });
+            });
+            setMode('home');
 
-                const novelPreviewOverlay = document.getElementById('novelPreviewOverlay');
-                const novelPreviewCloseBtn = document.getElementById('novelPreviewCloseBtn');
-                function openNovelPreview() { novelPreviewOverlay.classList.add('show'); }
-                function closeNovelPreview() { novelPreviewOverlay.classList.remove('show'); }
-                document.getElementById('novelNewCard').addEventListener('click', openNovelPreview);
-                novelPreviewCloseBtn.addEventListener('click', closeNovelPreview);
-                novelPreviewOverlay.addEventListener('click', function(e) { if (e.target === novelPreviewOverlay) closeNovelPreview(); });
-                document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && novelPreviewOverlay.classList.contains('show')) closeNovelPreview(); });
-
-                const rulesOverlay = document.getElementById('rulesModalOverlay');
-                const rulesCloseBtn = document.getElementById('rulesCloseBtn');
-                const rulesContent = document.getElementById('rulesContent');
-                let innerModalOverlay = null;
-
-                function buildRulesPage() {
-                    rulesContent.innerHTML = `
-                        <style>
-                            .site-header-rules { position: sticky; top: 0; width: 100%; padding: 12px clamp(16px, 4vw, 32px); background: rgba(251, 251, 253, 0.78); backdrop-filter: blur(25px) saturate(180%); border-bottom: 0.6px solid rgba(0,0,0,0.06); z-index: 30; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-family: 'Inter', sans-serif; }
-                            .logo-rules { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em; color: #1d1d1f; }
-                            .badge-rules { background: #e6f0fa; padding: 6px 14px; border-radius: 40px; font-size: 0.85rem; font-weight: 500; color: #0071e3; }
-                            .main-container-rules { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-                            .hero-rules { text-align: center; margin: 2rem 0 3rem 0; }
-                            .hero-rules h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 700; letter-spacing: -0.02em; background: linear-gradient(135deg, #1e3c2c, #0071e3); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 1rem; }
-                            .hero-rules p { font-size: 1.2rem; color: #5f5f66; max-width: 700px; margin: 0 auto; line-height: 1.4; }
-                            .hero-rules .date-highlight-rules { margin-top: 1rem; font-weight: 500; background: #f0f2f5; display: inline-block; padding: 0.3rem 1.2rem; border-radius: 40px; font-size: 0.9rem; }
-                            .card-rules { background: #ffffff; border-radius: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.03); padding: 2rem 1.8rem; margin-bottom: 2.5rem; border: 0.5px solid rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
-                            .card-rules:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.06); }
-                            .section-title-rules { font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
-                            .section-sub-rules { color: #6e6e73; border-left: 3px solid #0071e3; padding-left: 16px; margin-bottom: 1.8rem; font-size: 1rem; }
-                            .table-wrapper-rules { overflow-x: auto; margin: 1.2rem 0; }
-                            .member-table-rules { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 640px; }
-                            .member-table-rules th, .member-table-rules td { border: 1px solid #e4e8ed; padding: 12px 10px; text-align: center; vertical-align: middle; }
-                            .member-table-rules th { background: #f8fafc; font-weight: 700; font-size: 0.9rem; color: #1f3b4c; }
-                            .member-table-rules td:first-child { background: #fefcf7; font-weight: 600; text-align: left; color: #2c4c3b; }
-                            .check-rules { color: #2a7f3e; font-weight: bold; font-size: 1.1rem; }
-                            .cross-rules { color: #b91c1c; font-size: 1rem; }
-                            .price-em-rules { font-weight: 700; color: #c3641e; }
-                            .unified-rules-rules { background: #fcfaf5; border-radius: 28px; padding: 1.5rem 1.8rem; margin-top: 1.8rem; border: 1px solid #efe6d5; }
-                            .unified-rules-rules p { margin: 0.8rem 0; line-height: 1.45; }
-                            .unified-rules-rules .pill-rules { display: inline-block; background: #eef3fa; padding: 4px 14px; border-radius: 30px; font-size: 0.75rem; font-weight: 500; margin-right: 8px; margin-top: 6px; }
-                            .unified-rules-rules strong { color: #2c5a3e; }
-                            .price-list-inline-rules { margin: 0.6rem 0 0.2rem 0; padding-left: 0.5rem; border-left: 3px solid #d0a853; }
-                            .works-section-rules { margin: 2rem 0 2rem; }
-                            .works-grid-rules { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-                            .work-card-rules { background: white; border-radius: 28px; overflow: hidden; border: 1px solid #eef2f5; transition: all 0.2s ease; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-                            .work-card-rules:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.06); border-color: #e0e6ed; }
-                            .work-card-header-rules { padding: 1.2rem 1.2rem 0.6rem 1.2rem; }
-                            .work-title-rules { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.2px; color: #1d1d1f; }
-                            .work-price-rules { font-size: 0.8rem; color: #c3641e; font-weight: 500; background: #fef3e8; display: inline-block; padding: 0.2rem 0.7rem; border-radius: 30px; margin-top: 6px; }
-                            .work-summary-rules { padding: 0 1.2rem 1rem 1.2rem; font-size: 0.85rem; color: #6e6e73; line-height: 1.4; }
-                            .footer-cta-rules { text-align: center; margin-top: 2rem; padding: 2rem; background: #f6f6f9; border-radius: 40px; }
-                            .notice-rules { background: #f9e9d1; border-radius: 28px; padding: 1rem 1.8rem; margin: 2rem 0 1rem; font-size: 0.9rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; text-align: center; }
-                            .work-modal-overlay-rules { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 300; display: flex; align-items: center; justify-content: center; visibility: hidden; opacity: 0; transition: visibility 0.2s, opacity 0.2s; }
-                            .work-modal-overlay-rules.show { visibility: visible; opacity: 1; }
-                            .work-modal-dialog-rules { background: white; border-radius: 32px; max-width: 560px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2); position: relative; padding: 1.8rem 1.8rem 2rem; }
-                            .work-modal-close-rules { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 26px; cursor: pointer; color: #aaa; transition: color 0.2s; line-height: 1; }
-                            .work-modal-close-rules:hover { color: #1d1d1f; }
-                            .work-modal-title-rules { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; padding-right: 28px; }
-                            .work-modal-price-rules { display: inline-block; background: #fef3e8; color: #c3641e; font-weight: 500; padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.8rem; margin-bottom: 1rem; }
-                            .work-modal-body-rules { color: #2c2c2e; line-height: 1.55; font-size: 0.95rem; margin-top: 0.5rem; }
-                            .work-modal-body-rules p { margin: 0.8rem 0; }
-                        </style>
-                        <header class="site-header-rules"><div class="logo-rules">MOMOREAD<span style="font-weight:400; color:#86868b; font-size:0.9rem; margin-left:8px;">莫川读书会</span></div><div class="badge-rules">2026 新订阅制 · 透明契约</div></header>
-                        <main class="main-container-rules">
-                            <div class="hero-rules"><h1>阅读，是一场稳定的见面</h1><p>从2026年7月1日起，莫川读书会迈入全透明订阅时代。<br>三档会员 · 清晰权益 · 灵活选择 · 补偿承诺</p><div class="date-highlight-rules">📅 制度有效期：2026.7.1 – 2026.12.31 (半年不变价)</div></div>
-                            <div class="card-rules">
-                                <div class="section-title-rules">📋 三档会员制度 · 权益速览</div><div class="section-sub-rules">一般读者 / 26se（VIP）/ mailse —— 清晰对比，按需订阅</div>
-                                <div class="table-wrapper-rules"><table class="member-table-rules"><thead><tr><th>权益 / 费用</th><th>一般读者</th><th>26se（VIP）</th><th>mailse</th></tr></thead><tbody>
-                                    <tr><td>纸质</td><td>normal</td><td>good</td><td>normal</td></tr>
-                                    <tr><td>打印费 (每封信)</td><td>2元</td><td>1元</td><td>2元</td></tr>
-                                    <tr><td>信封</td><td class="check-rules">✅</td><td class="check-rules">✅</td><td class="check-rules">✅</td></tr>
-                                    <tr><td>广告纸</td><td class="check-rules">✅</td><td class="cross-rules">❌</td><td class="check-rules">✅</td></tr>
-                                    <tr><td>每周一信</td><td class="check-rules">✅</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                    <tr><td>小赠品</td><td class="check-rules">✅</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                    <tr><td>附赠短篇小说</td><td class="cross-rules">❌</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                    <tr><td>投稿资格</td><td class="check-rules">✅</td><td class="check-rules">✅</td><td class="check-rules">✅</td></tr>
-                                    <tr><td>投票权</td><td class="cross-rules">❌</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                    <tr><td>优惠折扣</td><td>无</td><td class="price-em-rules">8折</td><td class="price-em-rules">9.5折</td></tr>
-                                    <tr><td>每月会费</td><td class="price-em-rules">0.99元</td><td class="price-em-rules">3.99元</td><td class="price-em-rules">1.99元</td></tr>
-                                    <tr><td>邮费</td><td>自取</td><td>送达 (免费)</td><td>需支付50%邮费<br><span style="font-size:0.7rem; color:#7d7d82; display:block; margin-top:4px;">每月一邮寄</span></td></tr>
-                                    <tr><td>社群</td><td class="check-rules">✅</td><td class="cross-rules">❌</td><td class="check-rules">✅</td></tr>
-                                    <tr><td>新作优先看</td><td class="cross-rules">❌</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                    <tr><td>下午茶 (额外福利)</td><td class="check-rules">✅</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                    <tr><td>剩余天数"赈灾粮包"</td><td class="cross-rules">❌</td><td class="check-rules">✅</td><td class="cross-rules">❌</td></tr>
-                                </tbody></table></div>
-                                <div class="unified-rules-rules">
-                                    <p>✉️ <strong>发送频率：</strong>所有信件每月发送四次（前四个七天：1–7日、8–14日、15–21日、22–28日）。</p>
-                                    <p>🎁 <strong>赈灾粮包：</strong>剩余天数（29、30、31日）仅 <strong>VIP会员</strong> 可享用专属"粮包"（额外读物/小礼）。</p>
-                                    <div class="price-list-inline-rules"><strong>📚 单部作品购买价格（非会员或额外选购）：</strong><br>• 《非正式小组》《唐人探案》《崔氏二小生》《我在明朝当书童》 —— <strong>0.75元/章</strong><br>• 《三号线》《寄往1999的信》《无解命题》 —— <strong>0.50元/章</strong><br>• 《德州金夫妻》《我的朋友不是人》 —— <strong>0.25元/章</strong></div>
-                                    <div style="margin: 0.6rem 0 0.2rem;"><span class="pill-rules">100%原创</span> <span class="pill-rules">版权清晰</span></div>
-                                    <p>⏳ <strong>制度有效期：</strong>2026年7月1日 – 2026年12月31日（半年价格与核心规则稳定不变）。</p>
-                                </div>
-                                <div style="margin-top: 20px; font-size: 0.8rem; color: #86868b; border-top: 1px solid #eef2f5; padding-top: 16px; text-align: center;">* 过去纸张破损、临时停更等问题，新制度下严格执行破损补寄、停更补偿、提前告知规则，绝不让你白等。</div>
-                            </div>
-                            <div class="works-section-rules"><div class="section-title-rules">📚 原创作品集 · 点击卡片查看简介</div><div class="section-sub-rules">九部风格各异的原创故事，每周连载，会员畅读</div><div class="works-grid-rules" id="worksGridInner"></div></div>
-                            <div class="notice-rules"><div><strong>🌟 《非正式小组2》暑期重磅发布</strong> — 更多欢笑，更高脑洞，敬请期待！</div></div>
-                            <div class="footer-cta-rules"><div style="font-size: 1.2rem; font-weight: 500; margin-bottom: 8px;">📢 感谢你支持原创创意事业</div><p style="margin-bottom: 10px;">如果喜欢莫川的故事，恳请你帮我们宣传给身边的朋友。<br>一次转发，一份推荐，都是原创写作者继续前进的光。</p><p style="margin-top: 16px; font-size: 0.8rem; color: #6e6e73;">💡 VIP 专享优先新作 + 8折全站优惠 + 无广告纸 + 每月粮包<br>一般读者 / mailse 也可享受社群交流、投稿资格、下午茶福利</p></div>
-                        </main>
-                        <div class="work-modal-overlay-rules" id="workModalInner"><div class="work-modal-dialog-rules"><button class="work-modal-close-rules" id="workModalCloseInner">&times;</button><div class="work-modal-title-rules" id="workModalTitleInner"></div><div class="work-modal-price-rules" id="workModalPriceInner"></div><div class="work-modal-body-rules" id="workModalBodyInner"></div></div></div>
-                    `;
-                    const worksData = [
-                        { title: "非正式小组", priceCategory: "0.75元/章", summary: "初三学生意外闯入旧校舍地下石室，开启跨越二十年的时空谜团。", detail: "初三学生周毅、周静、赵晓阳、林小小……类型：都市奇幻 · 成长共鸣 · 连载中" },
-                        { title: "唐人探案", priceCategory: "0.75元/章", summary: "该作品尚未成型，敬请期待完整大纲。", detail: "该作品尚未成型，敬请期待完整大纲。" },
-                        { title: "崔氏二小生", priceCategory: "0.75元/章", summary: "该作品尚未成型，敬请期待完整大纲。", detail: "该作品尚未成型，敬请期待完整大纲。" },
-                        { title: "我在明朝当书童", priceCategory: "0.75元/章", summary: "该作品尚未成型，敬请期待完整大纲。", detail: "该作品尚未成型，敬请期待完整大纲。" },
-                        { title: "三号线", priceCategory: "0.50元/章", summary: "一列永远重复的末班地铁，三个被困者，一个必须放下的秘密。", detail: "向北每晚重复坐上同一列末班三号线地铁……类型：心理悬疑 · 时空循环 · 长篇已完结" },
-                        { title: "寄往1999的信", priceCategory: "0.50元/章", summary: "一封写给母亲青春的告白，也是一场二十五年的秘密守护。", detail: "季青崖在阁楼发现一个黄铜匣子……类型：奇幻情感 · 母女通信 · 即将上线" },
-                        { title: "无解命题", priceCategory: "0.50元/章", summary: "该作品尚未成型，敬请期待完整大纲。", detail: "该作品尚未成型，敬请期待完整大纲。" },
-                        { title: "德州金夫妻", priceCategory: "0.25元/章", summary: "因一盏老旧壁灯相遇的工程师与自由灵魂，从创业到建家的真实历程。", detail: "休斯顿的务实工程师科尔姆……类型：现实主义 · 创业成长 · 长篇已完结" },
-                        { title: "我的朋友不是人", priceCategory: "0.25元/章", summary: "该作品尚未成型，敬请期待完整大纲。", detail: "该作品尚未成型，敬请期待完整大纲。" }
-                    ];
-                    const grid = document.getElementById('worksGridInner');
-                    worksData.forEach(work => {
-                        const card = document.createElement('div'); card.className = 'work-card-rules';
-                        card.innerHTML = `<div class="work-card-header-rules"><div class="work-title-rules">${work.title}</div><div class="work-price-rules">${work.priceCategory}</div></div><div class="work-summary-rules">${work.summary}</div>`;
-                        card.addEventListener('click', () => {
-                            document.getElementById('workModalTitleInner').innerText = work.title;
-                            document.getElementById('workModalPriceInner').innerText = work.priceCategory;
-                            document.getElementById('workModalBodyInner').innerHTML = `<p>${work.detail.replace(/\n/g, '<br>')}</p>`;
-                            document.getElementById('workModalInner').classList.add('show');
-                        });
-                        grid.appendChild(card);
-                    });
-                    innerModalOverlay = document.getElementById('workModalInner');
-                    document.getElementById('workModalCloseInner').addEventListener('click', () => innerModalOverlay.classList.remove('show'));
-                    innerModalOverlay.addEventListener('click', (e) => { if (e.target === innerModalOverlay) innerModalOverlay.classList.remove('show'); });
-                }
-
-                function openRulesModal() { if (!rulesContent.hasChildNodes()) buildRulesPage(); rulesOverlay.classList.add('show'); }
-                function closeRulesModal() { rulesOverlay.classList.remove('show'); if (innerModalOverlay) innerModalOverlay.classList.remove('show'); }
-                rulesCloseBtn.addEventListener('click', closeRulesModal);
-                rulesOverlay.addEventListener('click', function(e) { if (e.target === rulesOverlay) closeRulesModal(); });
-                document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { if (innerModalOverlay && innerModalOverlay.classList.contains('show')) innerModalOverlay.classList.remove('show'); else if (rulesOverlay.classList.contains('show')) closeRulesModal(); } });
-
-                // 新按钮绑定
-                const newRuleBtn = document.getElementById('newRuleBtn');
-                if (newRuleBtn) {
-                    newRuleBtn.addEventListener('click', openRulesModal);
-                }
-                // 原卡片点击已隐藏，但保留事件绑定无妨（可注释掉，但保留无害）
-                // document.getElementById('newRuleCard').addEventListener('click', openRulesModal);
+            // 订阅按钮交互（示例，可替换为真实链接）
+            const subscribeBtn = document.getElementById('subscribeBtn');
+            if (subscribeBtn) {
+                subscribeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('订阅功能即将开放，敬请期待！');
+                    // 可替换为跳转到订阅页面或邮件收集
+                });
             }
-
-            window.addEventListener('load', init);
-            window.RubberEngine = RubberEngine;
-            window.SmoothScrollEngine = SmoothScrollEngine;
         })();
     </script>
 </body>
